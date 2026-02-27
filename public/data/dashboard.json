@@ -1,0 +1,29 @@
+{
+  "municipios": [
+    { "nome": "São Paulo",       "uf": "SP", "indice": 0.85, "populacao": "12.4 milhões", "area": "1.521 km²",  "regiao": "Sudeste",      "lat": -23.5505, "lng": -46.6333 },
+    { "nome": "Rio de Janeiro",  "uf": "RJ", "indice": 0.78, "populacao": "6.7 milhões",  "area": "1.200 km²",  "regiao": "Sudeste",      "lat": -22.9068, "lng": -43.1729 },
+    { "nome": "Brasília",        "uf": "DF", "indice": 0.92, "populacao": "3.1 milhões",  "area": "5.802 km²",  "regiao": "Centro-Oeste", "lat": -15.7939, "lng": -47.8828 },
+    { "nome": "Salvador",        "uf": "BA", "indice": 0.68, "populacao": "2.9 milhões",  "area": "693 km²",    "regiao": "Nordeste",     "lat": -12.9714, "lng": -38.5014 },
+    { "nome": "Fortaleza",       "uf": "CE", "indice": 0.72, "populacao": "2.7 milhões",  "area": "315 km²",    "regiao": "Nordeste",     "lat":  -3.7172, "lng": -38.5433 },
+    { "nome": "Belo Horizonte",  "uf": "MG", "indice": 0.81, "populacao": "2.5 milhões",  "area": "331 km²",    "regiao": "Sudeste",      "lat": -19.9167, "lng": -43.9345 },
+    { "nome": "Manaus",          "uf": "AM", "indice": 0.65, "populacao": "2.2 milhões",  "area": "11.401 km²", "regiao": "Norte",        "lat":  -3.1190, "lng": -60.0217 },
+    { "nome": "Curitiba",        "uf": "PR", "indice": 0.88, "populacao": "1.9 milhões",  "area": "435 km²",    "regiao": "Sul",          "lat": -25.4284, "lng": -49.2733 },
+    { "nome": "Recife",          "uf": "PE", "indice": 0.70, "populacao": "1.6 milhões",  "area": "218 km²",    "regiao": "Nordeste",     "lat":  -8.0476, "lng": -34.8770 },
+    { "nome": "Goiânia",         "uf": "GO", "indice": 0.76, "populacao": "1.5 milhões",  "area": "739 km²",    "regiao": "Centro-Oeste", "lat": -16.6869, "lng": -49.2648 },
+    { "nome": "Belém",           "uf": "PA", "indice": 0.62, "populacao": "1.5 milhões",  "area": "1.059 km²",  "regiao": "Norte",        "lat":  -1.4558, "lng": -48.5039 },
+    { "nome": "Porto Alegre",    "uf": "RS", "indice": 0.84, "populacao": "1.5 milhões",  "area": "497 km²",    "regiao": "Sul",          "lat": -30.0346, "lng": -51.2177 },
+    { "nome": "Guarulhos",       "uf": "SP", "indice": 0.74, "populacao": "1.4 milhões",  "area": "319 km²",    "regiao": "Sudeste",      "lat": -23.4538, "lng": -46.5333 },
+    { "nome": "Campinas",        "uf": "SP", "indice": 0.82, "populacao": "1.2 milhões",  "area": "795 km²",    "regiao": "Sudeste",      "lat": -22.9099, "lng": -47.0626 },
+    { "nome": "São Luís",        "uf": "MA", "indice": 0.64, "populacao": "1.1 milhões",  "area": "835 km²",    "regiao": "Nordeste",     "lat":  -2.5387, "lng": -44.2825 }
+  ],
+  "indices": [
+    "Cobertura de Saúde",
+    "Mortalidade Infantil",
+    "Saneamento Básico",
+    "Vacinação",
+    "Doenças Crônicas",
+    "Saúde Mental",
+    "Nutrição",
+    "Qualidade do Ar"
+  ]
+}

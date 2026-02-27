@@ -8,24 +8,21 @@ function Footer(){
       <div className='footer__content px-(--mobile-padding) sm:px-(--desktop-padding) w-full'>
         <div className="footer__navigationWrapper max-w-(--width-size) m-auto w-full py-2 flex flex-col gap-2">
           <h2 className="footer__title font-semibold">Links Rápidos</h2>
-          <nav className="footer__navigation footer__navigation--main hidden sm:block">
-            <ul className="footer__list flex gap-4 text-sm">
-              <li className="footer__item"><Link to="/" className="footer__link text-neutral-100 hover:underline">Painel de dados</Link></li>
-              <li className="footer__item"><Link to="/painel-de-indicadores" className="footer__link text-neutral-100 hover:underline">Painel de indicadores</Link></li>
-              <li className="footer__item"><Link to="/biblioteca" className="footer__link text-neutral-100 hover:underline">Biblioteca de documentos</Link></li>
-              <li className="footer__item"><Link to="/publicacoes" className="footer__link text-neutral-100 hover:underline">Produções bibliográficas</Link></li>
-              <li className="footer__item"><Link to="/sobre" className="footer__link text-neutral-100 hover:underline">Sobre</Link></li>
+          <nav className="footer__navigation footer__navigation--main">
+            <ul className="footer__list flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm flex-wrap">
+              <li className="footer__item"><Link to="/" className="footer__link text-neutral-100 hover:underline shrink">Painel de dados</Link></li>
+              <li className="footer__item"><Link to="/painel-de-indicadores" className="footer__link text-neutral-100 hover:underline shrink">Painel de indicadores</Link></li>
+              <li className="footer__item"><Link to="/biblioteca" className="footer__link text-neutral-100 hover:underline shrink">Biblioteca de documentos</Link></li>
+              <li className="footer__item"><Link to="/publicacoes" className="footer__link text-neutral-100 hover:underline shrink">Produções bibliográficas</Link></li>
+              <li className="footer__item"><Link to="/sobre" className="footer__link text-neutral-100 hover:underline shrink">Sobre</Link></li>
             </ul>
           </nav>
         </div>
-        <div className="footer__logos max-w-(--width-size) m-auto w-full flex items-center justify-between py-8">
-          {/* Logo SUS */}
+        <div className="footer__logos max-w-(--width-size) m-auto w-full flex flex-col justify-start lg:flex-row lg:items-center sm:justify-between gap-4 py-8">
           <div className="footer__logo footer__logo--sus">
             <img src={logoSUS} alt="" className="footer__logoImg" />
           </div>
-
-          {/* Logos (fiocruz, sus, ministério e governo) */}
-          <div className="footer__logo footer__logo--sus">
+          <div className="footer__logo footer__logo--showcase">
             <img src={logoShowcase} alt="" className="footer__logoImg" />
           </div>
         </div>
