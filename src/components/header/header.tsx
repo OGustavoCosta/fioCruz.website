@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-import logoGovBr from '../../assets/images/header/logo-govbr.png'
-import logoFioCruz from '../../assets/images/header/logo-fiocruz.png'
+
+const logoGovBr = '/images/header/logo-govbr.png'
+const logoFioCruz = '/images/header/logo-fiocruz.png'
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)

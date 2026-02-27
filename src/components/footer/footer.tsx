@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
-import logoSUS from '../../assets/images/footer/logo-sus.png'
-import logoShowcase from '../../assets/images/footer/logo-showcase.png'
+
+const logoSUS = '/images/footer/logo-sus.png'
+const logoShowcase = '/images/footer/logo-showcase.png'
 
 function Footer(){
   return(
