@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 
-const logoSUS = '/images/footer/logo-sus.png'
-const logoShowcase = '/images/footer/logo-showcase.png'
+const logoSUS = 'images/footer/logo-sus.png'
+const logoShowcase = 'images/footer/logo-showcase.png'
 
 function Footer(){
   return(
