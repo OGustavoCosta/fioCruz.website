@@ -1,0 +1,164 @@
+<!-- Título da página -->
+<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) py-8 bg-neutral-50">
+  <header class="header header--dataDashboardPage mx-auto max-w-(--width-size) flex flex-col gap-3">
+    <h1 class="header__title header__title--dataDashboardPage text-4xl font-semibold text-dark-cyan max-w-200">Observatório da Saúde para a Agenda 2030</h1>
+    <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Explore dados atualizados sobre indicadores de desenvolvimento sustentável em saúde no Brasil. Utilize os filtros para visualizar distribuição geográfica e realizar comparações municipais detalhadas.</p>
+  </header>
+</div>
+
+<!-- Informativo -->
+<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+  <section class="info">
+    <div class="dataDashboardPage__infoContent mx-auto max-w-(--width-size)">
+      <div class="dataDashboardPage__infoBox bg-gradient-to-br from-teal-light to-white border-l-4 border-teal rounded-xl p-5">
+        <h2 class="dataDashboardPage__infoTitle text-xl font-semibold text-teal-dark mb-3 flex items-center gap-2">
+          <i data-lucide="info" class="dataDashboardPage__infoIcon shrink-0" width="20" height="20"></i>
+          Sobre os Índices e IEDs
+        </h2>
+        <p class="dataDashboardPage__infoText text-neutral-500 text-[0.9375rem] leading-[1.7] mb-3">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. At deleniti neque vel eligendi perferendis provident adipisci possimus architecto, cupiditate officiis rerum dolore reprehenderit consequatur cum autem reiciendis natus corrupti rem.
+        </p>
+        <p class="dataDashboardPage__infoText text-neutral-500 text-[0.9375rem] leading-[1.7] mb-3">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit pariatur reiciendis dolor? Unde est inventore debitis ab accusantium. Quod vitae quae accusamus impedit saepe deserunt modi sit aperiam asperiores nihil.
+        </p>
+        <a href="#" class="dataDashboardPage__infoLink inline-flex items-center gap-2 text-teal font-semibold text-[0.9375rem] hover:text-teal-dark hover:gap-3 transition-all">
+          Saiba mais sobre a metodologia
+          <i data-lucide="arrow-right" class="dataDashboardPage__infoLinkIcon shrink-0" width="16" height="16"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Filtros -->
+<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+  <section class="filters">
+    <div class="dataDashboardPage__filtersContent mx-auto max-w-(--width-size) bg-gradient-to-br from-teal to-teal-dark rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,121,107,0.15)]">
+      <h2 class="dataDashboardPage__filtersTitle text-xl font-semibold text-white mb-5 flex items-center gap-2">
+        <i data-lucide="sliders-horizontal" class="dataDashboardPage__filtersTitleIcon shrink-0" width="20" height="20"></i>
+        Filtros de Visualização
+      </h2>
+      <div class="dataDashboardPage__filtersGroup flex flex-col gap-5">
+
+        <!-- IED Toggle -->
+        <div class="dataDashboardPage__iedSection bg-white/10 rounded-xl p-4">
+          <span class="dataDashboardPage__iedLabel block text-sm font-semibold text-white/95 mb-3">
+            Lorem Ipsum Dolor (IED)
+          </span>
+          <div class="dataDashboardPage__iedButtons grid grid-cols-2 sm:grid-cols-4 gap-2 bg-black/20 p-1 rounded-xl">
+            <button type="button" data-ied="1" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-white text-teal shadow-[0_2px_8px_rgba(0,0,0,0.2)]">IED 1</button>
+            <button type="button" data-ied="2" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">IED 2</button>
+            <button type="button" data-ied="3" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">IED 3</button>
+            <button type="button" data-ied="4" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">IED 4</button>
+          </div>
+        </div>
+
+        <!-- Dropdown de índice -->
+        <div class="dataDashboardPage__selectGroup flex flex-col gap-2">
+          <span class="dataDashboardPage__selectLabel text-sm font-semibold text-white/95">
+            Índice Observado
+          </span>
+          <div id="indice-select" class="dataDashboardPage__select relative">
+            <button
+              type="button"
+              id="indice-select-trigger"
+              class="dataDashboardPage__selectTrigger w-full flex items-center justify-between gap-3 px-4 py-3 border-2 border-white/20 rounded-lg bg-white/95 text-[0.9375rem] text-neutral-500 hover:bg-white hover:border-white/40 transition-all cursor-pointer"
+            >
+              <!-- JS: atualizado com "Índice N — <nome>" após getDashboardData() -->
+              <span id="indice-select-value" class="dataDashboardPage__selectValue truncate">—</span>
+              <i data-lucide="chevron-down" id="indice-select-chevron" class="dataDashboardPage__selectChevron shrink-0 text-neutral-400 transition-transform duration-200" width="18" height="18"></i>
+            </button>
+            <!-- JS: populado com renderDropdownOptions() após getDashboardData() -->
+            <ul id="indice-select-dropdown" class="dataDashboardPage__selectDropdown absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-neutral-150 z-50 overflow-hidden max-h-64 overflow-y-auto hidden"></ul>
+          </div>
+        </div>
+
+        <!-- Aplicar -->
+        <button class="dataDashboardPage__filtersApply self-start inline-flex items-center gap-2 px-6 py-3 bg-white text-teal rounded-lg text-base font-semibold hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-all cursor-pointer">
+          <i data-lucide="refresh-cw" class="dataDashboardPage__filtersApplyIcon shrink-0" width="16" height="16"></i>
+          Aplicar Filtros
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- -------------------------------------------------------------- -->
+<!-- Deixei o MAPA e o COMPARATIVO MUNICIPAL em css padrão para facilitar o seu uso -->
+<!-- Observação: as demais seções utiliza tailwind css (por isso tem esse monte de classes) -->
+<!-- -------------------------------------------------------------- -->
+
+<!-- Mapa -->
+<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+  <section class="map">
+    <div class="dataDashboardPage__mapContent">
+      <div class="dataDashboardPage__mapHeader">
+        <h2 class="dataDashboardPage__mapTitle">Distribuição Geográfica</h2>
+        <i data-lucide="map" class="dataDashboardPage__mapIcon" width="20" height="20"></i>
+      </div>
+      <div class="dataDashboardPage__mapContainer">
+        <!-- JS: mapa Leaflet inicializado por initMap() com circleMarkers por município -->
+        <div id="leaflet-map" class="dataDashboardPage__mapLeaflet"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Comparativo Municipal -->
+<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+  <section class="comparativo">
+    <div class="dataDashboardPage__comparativoContent">
+      <div class="dataDashboardPage__comparativoHeader">
+        <h2 class="dataDashboardPage__comparativoTitle">Comparativo Municipal</h2>
+        <p class="dataDashboardPage__comparativoSubtitle">Selecione um município na lista para visualizar o comparativo de índices</p>
+      </div>
+      <div class="dataDashboardPage__comparativoGrid">
+
+        <!-- Lista -->
+        <div class="dataDashboardPage__municipiosPanel">
+          <div class="dataDashboardPage__municipiosBusca">
+            <input
+              id="municipios-busca"
+              type="text"
+              class="dataDashboardPage__municipiosBuscaInput"
+              placeholder="Pesquisar município..."
+            />
+            <i data-lucide="search" class="dataDashboardPage__municipiosBuscaIcon" width="16" height="16"></i>
+          </div>
+          <!-- JS: populado com renderMunicipiosList() após getDashboardData(); re-renderizado ao buscar ou selecionar -->
+          <ul id="municipios-list" class="dataDashboardPage__municipiosList"></ul>
+        </div>
+
+        <!-- Gráfico -->
+        <!-- JS: populado com renderChartPanel() — estado vazio ou painel com gráfico do município selecionado -->
+        <div id="chart-panel" class="dataDashboardPage__chartPanel"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Exportar -->
+<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-8 bg-neutral-50">
+  <section class="download">
+    <div class="dataDashboardPage__downloadContent mx-auto max-w-(--width-size) bg-white rounded-xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] flex flex-col sm:flex-row items-start sm:items-center justify-between flex-wrap gap-4">
+      <div class="dataDashboardPage__downloadInfo flex-1 min-w-60">
+        <h2 class="dataDashboardPage__downloadTitle text-[1.125rem] font-semibold text-neutral-500 mb-2">Exportar Dados</h2>
+        <p class="dataDashboardPage__downloadSubtitle text-sm text-neutral-400">Faça o download dos dados filtrados em diferentes formatos para análise offline.</p>
+      </div>
+      <div class="dataDashboardPage__downloadButtons flex gap-3 flex-wrap">
+        <button class="dataDashboardPage__downloadBtn dataDashboardPage__downloadBtn--csv inline-flex items-center gap-2 px-5 py-3 bg-teal text-white border-2 border-teal rounded-lg text-[0.9375rem] font-semibold hover:bg-teal-dark hover:border-teal-dark hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,121,107,0.3)] transition-all cursor-pointer">
+          <i data-lucide="download" class="dataDashboardPage__downloadBtnIcon shrink-0" width="16" height="16"></i>
+          Baixar CSV
+        </button>
+        <button class="dataDashboardPage__downloadBtn dataDashboardPage__downloadBtn--excel inline-flex items-center gap-2 px-5 py-3 bg-white text-teal border-2 border-teal rounded-lg text-[0.9375rem] font-semibold hover:bg-teal-light transition-all cursor-pointer">
+          <i data-lucide="download" class="dataDashboardPage__downloadBtnIcon shrink-0" width="16" height="16"></i>
+          Baixar Excel
+        </button>
+        <button class="dataDashboardPage__downloadBtn dataDashboardPage__downloadBtn--json inline-flex items-center gap-2 px-5 py-3 bg-white text-teal border-2 border-teal rounded-lg text-[0.9375rem] font-semibold hover:bg-teal-light transition-all cursor-pointer">
+          <i data-lucide="download" class="dataDashboardPage__downloadBtnIcon shrink-0" width="16" height="16"></i>
+          Baixar JSON
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

@@ -5,6 +5,8 @@
 @import "./base/typography.css";
 @import "./base/base.css";
 
+@source "../../**/*.{html,ts}";
+
 /* Utils */
 @theme{
     --breakpoint-xmd: 32rem;

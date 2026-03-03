@@ -1,0 +1,97 @@
+<!-- Overlay -->
+<div
+  id="header__overlay"
+  class="header__overlay fixed inset-0 bg-black/50 z-1000 transition-opacity duration-300 sm:hidden opacity-0 pointer-events-none"
+></div>
+
+<!-- Drawer -->
+<aside
+  id="header__drawer"
+  class="header__drawer fixed top-0 left-0 h-full w-72 bg-dark-cyan text-white z-1001 flex flex-col transition-transform duration-300 sm:hidden -translate-x-full"
+>
+  <div class="header__drawerHeader flex items-center justify-between px-4 py-4 border-b border-white/20">
+    <div class="header__logo header__logo--fiocruz">
+      <img src="images/header/logo-fiocruz.png" alt="FioCruz" class="header__logoImg h-8" />
+    </div>
+    <button
+      id="header__drawerClose"
+      class="header__drawerClose text-white p-1 cursor-pointer"
+      aria-label="Fechar menu"
+    >
+      <svg class="header__drawerCloseIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <nav class="header__drawerNavigation flex-1 px-4 py-6">
+    <ul class="header__drawerList flex flex-col gap-1">
+      <li class="header__drawerItem"><a href="/" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Painel de dados</a></li>
+      <li class="header__drawerItem"><a href="/painel-de-indicadores" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Painel de indicadores</a></li>
+      <li class="header__drawerItem"><a href="/biblioteca" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Biblioteca de documentos</a></li>
+      <li class="header__drawerItem"><a href="/publicacoes" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Produções bibliográficas</a></li>
+      <li class="header__drawerItem"><a href="/sobre" data-navigo class="header__drawerLink block py-3 text-white hover:underline">Sobre</a></li>
+    </ul>
+  </nav>
+
+  <nav class="header__drawerExternalNavigation px-4 py-4 border-t border-white/20">
+    <ul class="header__drawerExternalList flex flex-col gap-1">
+      <li class="header__drawerExternalItem"><a href="https://www.gov.br/pt-br/orgaos-do-governo" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Órgãos do Governo</a></li>
+      <li class="header__drawerExternalItem"><a href="https://www.gov.br/acessoainformacao/pt-br" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Acesso à Informação</a></li>
+      <li class="header__drawerExternalItem"><a href="https://www4.planalto.gov.br/legislacao" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Legislação</a></li>
+      <li class="header__drawerExternalItem"><a href="#" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Acessibilidade</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- Header -->
+<header class="header w-full bg-dark-cyan text-white px-(--mobile-padding) sm:px-(--desktop-padding)">
+
+  <!-- Barra superior: logo gov.br + links (desktop) / hamburger (mobile) -->
+  <div class="header__topBar mx-auto max-w-(--width-size) py-3 flex items-center justify-between">
+    <div class="header__logo header__logo--govbr">
+      <img src="images/header/logo-govbr.png" alt="" class="header__logoImg" />
+    </div>
+
+    <nav class="header__navigation hidden sm:block">
+      <ul class="header__list flex gap-4">
+        <li class="header__item"><a href="https://www.gov.br/pt-br/orgaos-do-governo" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Órgãos do Governo</a></li>
+        <li class="header__item"><a href="https://www.gov.br/acessoainformacao/pt-br" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Acesso à Informação</a></li>
+        <li class="header__item"><a href="https://www4.planalto.gov.br/legislacao" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Legislação</a></li>
+        <li class="header__item"><a href="#" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Acessibilidade</a></li>
+      </ul>
+    </nav>
+
+    <button
+      id="header__menuButton"
+      class="header__menuButton sm:hidden text-white p-1 cursor-pointer"
+      aria-label="Abrir menu"
+    >
+      <svg class="header__menuIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Logo FioCruz -->
+  <div class="header__logoWrapper mx-auto max-w-(--width-size) py-6 flex justify-start">
+    <div class="header__logo header__logo--fiocruz">
+      <img src="images/header/logo-fiocruz.png" alt="" class="header__logoImg" />
+    </div>
+  </div>
+
+  <!-- Navegação principal (desktop) -->
+  <nav class="header__navigation header__navigation--main hidden sm:block mx-auto max-w-(--width-size) w-full py-4">
+    <ul class="header__list flex flex-wrap gap-6">
+      <li class="header__item"><a href="/" data-navigo class="header__link text-white hover:underline shrink-0">Painel de dados</a></li>
+      <li class="header__item"><a href="/painel-de-indicadores" data-navigo class="header__link text-white hover:underline shrink-0">Painel de indicadores</a></li>
+      <li class="header__item"><a href="/biblioteca" data-navigo class="header__link text-white hover:underline shrink-0">Biblioteca de documentos</a></li>
+      <li class="header__item"><a href="/publicacoes" data-navigo class="header__link text-white hover:underline shrink-0">Produções bibliográficas</a></li>
+      <li class="header__item"><a href="/sobre" data-navigo class="header__link text-white hover:underline shrink-0">Sobre</a></li>
+    </ul>
+  </nav>
+
+</header>
