@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Fiocruz{% endblock %}</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'blue':         '#1351b4',
+            'dark-blue':    '#0c326f',
+            'dark-cyan':    '#037478',
+            'cyan':         '#0bb19d',
+            'teal':         '#00796B',
+            'teal-dark':    '#004D40',
+            'teal-light':   '#E0F2F1',
+            'green':        '#268744',
+            'yellow':       '#ffd125',
+            'red':          '#a23737',
+            'neutral-900':  '#000',
+            'neutral-600':  '#121212',
+            'neutral-500':  '#393939',
+            'neutral-400':  '#626262',
+            'neutral-300':  '#9a9a9a',
+            'neutral-200':  '#cacaca',
+            'neutral-175':  '#dcdcdc',
+            'neutral-150':  '#ebebeb',
+            'neutral-100':  '#f1f1f1',
+            'neutral-50':   '#f5f5f7',
+            'neutral-0':    '#fff',
+          },
+          fontFamily: {
+            'rawline': ['Rawline', 'sans-serif'],
+          },
+          spacing: {
+            'mobile-padding': '1rem',
+            'desktop-padding': '2rem',
+          },
+          maxWidth: {
+            'width-size': '1280px',
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- CSS customizado -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="mainLayout grid grid-rows-[auto_1fr_auto] w-full min-h-dvh">
+  {% include 'components/header.html' %}
+
+  <main id="main" class="mainLayout__main w-full bg-neutral-50">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'components/footer.html' %}
+
+  <!-- Inicializa ícones Lucide -->
+  <script>lucide.createIcons()</script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

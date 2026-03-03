@@ -1,10 +1,8 @@
-import headerHTML from './header.html?raw'
-
-function setupDrawer(): void {
-  const overlay = document.getElementById('header__overlay')!
-  const drawer = document.getElementById('header__drawer')!
-  const menuButton = document.getElementById('header__menuButton')!
-  const closeButton = document.getElementById('header__drawerClose')!
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('header__overlay')
+  const drawer = document.getElementById('header__drawer')
+  const menuButton = document.getElementById('header__menuButton')
+  const closeButton = document.getElementById('header__drawerClose')
 
   const openDrawer = () => {
     drawer.classList.remove('-translate-x-full')
@@ -23,14 +21,4 @@ function setupDrawer(): void {
   menuButton.addEventListener('click', openDrawer)
   closeButton.addEventListener('click', closeDrawer)
   overlay.addEventListener('click', closeDrawer)
-
-  // Fecha o drawer ao navegar (mobile)
-  drawer.querySelectorAll('a[data-navigo]').forEach(link => {
-    link.addEventListener('click', closeDrawer)
-  })
-}
-
-export function renderHeader(container: HTMLElement): void {
-  container.innerHTML = headerHTML
-  setupDrawer()
-}
+})

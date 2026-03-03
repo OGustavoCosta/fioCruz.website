@@ -11,7 +11,7 @@
 >
   <div class="header__drawerHeader flex items-center justify-between px-4 py-4 border-b border-white/20">
     <div class="header__logo header__logo--fiocruz">
-      <img src="images/header/logo-fiocruz.png" alt="FioCruz" class="header__logoImg h-8" />
+      <img src="{{ url_for('static', filename='images/header/logo-fiocruz.png') }}" alt="FioCruz" class="header__logoImg h-8" />
     </div>
     <button
       id="header__drawerClose"
@@ -27,11 +27,11 @@
 
   <nav class="header__drawerNavigation flex-1 px-4 py-6">
     <ul class="header__drawerList flex flex-col gap-1">
-      <li class="header__drawerItem"><a href="/" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Painel de dados</a></li>
-      <li class="header__drawerItem"><a href="/painel-de-indicadores" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Painel de indicadores</a></li>
-      <li class="header__drawerItem"><a href="/biblioteca" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Biblioteca de documentos</a></li>
-      <li class="header__drawerItem"><a href="/publicacoes" data-navigo class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Produções bibliográficas</a></li>
-      <li class="header__drawerItem"><a href="/sobre" data-navigo class="header__drawerLink block py-3 text-white hover:underline">Sobre</a></li>
+      <li class="header__drawerItem"><a href="{{ url_for('data_dashboard') }}" class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Painel de dados</a></li>
+      <li class="header__drawerItem"><a href="{{ url_for('indicators_dashboard') }}" class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Painel de indicadores</a></li>
+      <li class="header__drawerItem"><a href="{{ url_for('library') }}" class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Biblioteca de documentos</a></li>
+      <li class="header__drawerItem"><a href="{{ url_for('publications') }}" class="header__drawerLink block py-3 text-white hover:underline border-b border-white/10">Produções bibliográficas</a></li>
+      <li class="header__drawerItem"><a href="{{ url_for('about') }}" class="header__drawerLink block py-3 text-white hover:underline">Sobre</a></li>
     </ul>
   </nav>
 
@@ -46,12 +46,12 @@
 </aside>
 
 <!-- Header -->
-<header class="header w-full bg-dark-cyan text-white px-(--mobile-padding) sm:px-(--desktop-padding)">
+<header class="header w-full bg-dark-cyan text-white px-mobile-padding sm:px-desktop-padding">
 
   <!-- Barra superior: logo gov.br + links (desktop) / hamburger (mobile) -->
-  <div class="header__topBar mx-auto max-w-(--width-size) py-3 flex items-center justify-between">
+  <div class="header__topBar mx-auto max-w-width-size py-3 flex items-center justify-between">
     <div class="header__logo header__logo--govbr">
-      <img src="images/header/logo-govbr.png" alt="" class="header__logoImg" />
+      <img src="{{ url_for('static', filename='images/header/logo-govbr.png') }}" alt="" class="header__logoImg" />
     </div>
 
     <nav class="header__navigation hidden sm:block">
@@ -77,20 +77,20 @@
   </div>
 
   <!-- Logo FioCruz -->
-  <div class="header__logoWrapper mx-auto max-w-(--width-size) py-6 flex justify-start">
+  <div class="header__logoWrapper mx-auto max-w-width-size py-6 flex justify-start">
     <div class="header__logo header__logo--fiocruz">
-      <img src="images/header/logo-fiocruz.png" alt="" class="header__logoImg" />
+      <img src="{{ url_for('static', filename='images/header/logo-fiocruz.png') }}" alt="" class="header__logoImg" />
     </div>
   </div>
 
   <!-- Navegação principal (desktop) -->
-  <nav class="header__navigation header__navigation--main hidden sm:block mx-auto max-w-(--width-size) w-full py-4">
+  <nav class="header__navigation header__navigation--main hidden sm:block mx-auto max-w-width-size w-full py-4">
     <ul class="header__list flex flex-wrap gap-6">
-      <li class="header__item"><a href="/" data-navigo class="header__link text-white hover:underline shrink-0">Painel de dados</a></li>
-      <li class="header__item"><a href="/painel-de-indicadores" data-navigo class="header__link text-white hover:underline shrink-0">Painel de indicadores</a></li>
-      <li class="header__item"><a href="/biblioteca" data-navigo class="header__link text-white hover:underline shrink-0">Biblioteca de documentos</a></li>
-      <li class="header__item"><a href="/publicacoes" data-navigo class="header__link text-white hover:underline shrink-0">Produções bibliográficas</a></li>
-      <li class="header__item"><a href="/sobre" data-navigo class="header__link text-white hover:underline shrink-0">Sobre</a></li>
+      <li class="header__item"><a href="{{ url_for('data_dashboard') }}" class="header__link text-white hover:underline shrink-0">Painel de dados</a></li>
+      <li class="header__item"><a href="{{ url_for('indicators_dashboard') }}" class="header__link text-white hover:underline shrink-0">Painel de indicadores</a></li>
+      <li class="header__item"><a href="{{ url_for('library') }}" class="header__link text-white hover:underline shrink-0">Biblioteca de documentos</a></li>
+      <li class="header__item"><a href="{{ url_for('publications') }}" class="header__link text-white hover:underline shrink-0">Produções bibliográficas</a></li>
+      <li class="header__item"><a href="{{ url_for('about') }}" class="header__link text-white hover:underline shrink-0">Sobre</a></li>
     </ul>
   </nav>
 

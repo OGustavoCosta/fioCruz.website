@@ -1,14 +1,8 @@
-import './dataDashboardPage.css'
-import L from 'leaflet'
-import { createIcons, Info, ArrowRight, SlidersHorizontal, Map as LucideMap, RefreshCw, Search, BarChart2, Download, ChevronDown, Check, Loader2, AlertCircle } from 'lucide'
-import { getDashboardData, type Municipio } from '../../services/dashboardService'
-import pageHTML from './dataDashboardPage.html?raw'
-
 // ---- Leaflet instance ----
-let leafletMapInstance: L.Map | null = null
+let leafletMapInstance = null
 
 // ---- Helpers ----
-function getCorHexIndice(indice: number): string {
+function getCorHexIndice(indice) {
   if (indice >= 0.85) return '#168821'
   if (indice >= 0.75) return '#4CAF50'
   if (indice >= 0.70) return '#FDB813'
@@ -17,17 +11,7 @@ function getCorHexIndice(indice: number): string {
 }
 
 // ---- State ----
-interface State {
-  municipios: Municipio[]
-  indices: string[]
-  iedSelecionado: number
-  indiceSelecionado: number
-  dropdownOpen: boolean
-  busca: string
-  municipioSelecionado: string | null
-}
-
-let state: State = {
+let state = {
   municipios: [],
   indices: [],
   iedSelecionado: 1,
@@ -38,14 +22,14 @@ let state: State = {
 }
 
 // ---- Partials ----
-function getMunicipiosFiltrados(): Municipio[] {
+function getMunicipiosFiltrados() {
   return state.municipios.filter(m =>
     m.nome.toLowerCase().includes(state.busca.toLowerCase()) ||
     m.uf.toLowerCase().includes(state.busca.toLowerCase())
   )
 }
 
-function renderMunicipiosList(): string {
+function renderMunicipiosList() {
   const filtrados = getMunicipiosFiltrados()
   if (filtrados.length === 0) {
     return '<li class="dataDashboardPage__municipiosEmpty text-sm text-neutral-400 py-4 text-center">Nenhum município encontrado.</li>'
@@ -83,7 +67,7 @@ function renderMunicipiosList(): string {
   `).join('')
 }
 
-function renderChartPanel(): string {
+function renderChartPanel() {
   const municipioAtual = state.municipios.find(m => m.nome === state.municipioSelecionado) ?? null
   if (municipioAtual) {
     return `
@@ -107,7 +91,7 @@ function renderChartPanel(): string {
   `
 }
 
-function renderDropdownOptions(): string {
+function renderDropdownOptions() {
   return state.indices.map((option, i) => `
     <li class="dataDashboardPage__selectOption">
       <button
@@ -128,7 +112,7 @@ function renderDropdownOptions(): string {
 }
 
 // ---- Map ----
-function initMap(): void {
+function initMap() {
   if (leafletMapInstance) {
     try { leafletMapInstance.remove() } catch { /* container já removido */ }
     leafletMapInstance = null
@@ -152,13 +136,13 @@ function initMap(): void {
       radius: 8,
     })
       .bindPopup(`<strong>${m.nome} — ${m.uf}</strong><br>Índice: <strong>${m.indice.toFixed(2)}</strong><br>Pop.: ${m.populacao}<br>Região: ${m.regiao}`)
-      .addTo(leafletMapInstance!)
+      .addTo(leafletMapInstance)
   })
 }
 
 // ---- Events ----
-function setupMunicipioEvents(container: HTMLElement): void {
-  container.querySelectorAll<HTMLButtonElement>('[data-municipio]').forEach(btn => {
+function setupMunicipioEvents(container) {
+  container.querySelectorAll('[data-municipio]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.municipioSelecionado = btn.dataset.municipio ?? null
 
@@ -171,18 +155,18 @@ function setupMunicipioEvents(container: HTMLElement): void {
       const chartPanel = container.querySelector('#chart-panel')
       if (chartPanel) {
         chartPanel.innerHTML = renderChartPanel()
-        createIcons({ icons: { BarChart2 } })
+        lucide.createIcons()
       }
     })
   })
 }
 
-function setupEvents(container: HTMLElement): void {
+function setupEvents(container) {
   // IED buttons
-  container.querySelectorAll<HTMLButtonElement>('[data-ied]').forEach(btn => {
+  container.querySelectorAll('[data-ied]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.iedSelecionado = parseInt(btn.dataset.ied ?? '1')
-      container.querySelectorAll<HTMLButtonElement>('[data-ied]').forEach(b => {
+      container.querySelectorAll('[data-ied]').forEach(b => {
         const isActive = parseInt(b.dataset.ied ?? '') === state.iedSelecionado
         b.className = `dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer ${isActive ? 'bg-white text-teal shadow-[0_2px_8px_rgba(0,0,0,0.2)]' : 'bg-transparent text-white hover:bg-white/15'}`
       })
@@ -190,9 +174,9 @@ function setupEvents(container: HTMLElement): void {
   })
 
   // Dropdown
-  const trigger = container.querySelector<HTMLButtonElement>('#indice-select-trigger')
-  const dropdown = container.querySelector<HTMLUListElement>('#indice-select-dropdown')
-  const chevron = container.querySelector<HTMLElement>('#indice-select-chevron')
+  const trigger = container.querySelector('#indice-select-trigger')
+  const dropdown = container.querySelector('#indice-select-dropdown')
+  const chevron = container.querySelector('#indice-select-chevron')
 
   trigger?.addEventListener('click', () => {
     state.dropdownOpen = !state.dropdownOpen
@@ -201,7 +185,7 @@ function setupEvents(container: HTMLElement): void {
   })
 
   dropdown?.addEventListener('click', (e) => {
-    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-indice]')
+    const btn = e.target.closest('[data-indice]')
     if (!btn) return
     state.indiceSelecionado = parseInt(btn.dataset.indice ?? '0')
     state.dropdownOpen = false
@@ -212,12 +196,12 @@ function setupEvents(container: HTMLElement): void {
     dropdown.classList.add('hidden')
     chevron?.classList.remove('rotate-180')
     dropdown.innerHTML = renderDropdownOptions()
-    createIcons({ icons: { Check } })
+    lucide.createIcons()
   })
 
   document.addEventListener('mousedown', (e) => {
     const selectEl = container.querySelector('#indice-select')
-    if (selectEl && !selectEl.contains(e.target as Node)) {
+    if (selectEl && !selectEl.contains(e.target)) {
       state.dropdownOpen = false
       dropdown?.classList.add('hidden')
       chevron?.classList.remove('rotate-180')
@@ -225,8 +209,8 @@ function setupEvents(container: HTMLElement): void {
   })
 
   // Search
-  container.querySelector<HTMLInputElement>('#municipios-busca')?.addEventListener('input', (e) => {
-    state.busca = (e.target as HTMLInputElement).value
+  container.querySelector('#municipios-busca')?.addEventListener('input', (e) => {
+    state.busca = e.target.value
     const listEl = container.querySelector('#municipios-list')
     if (listEl) {
       listEl.innerHTML = renderMunicipiosList()
@@ -238,7 +222,12 @@ function setupEvents(container: HTMLElement): void {
 }
 
 // ---- Entry point ----
-export function initDataDashboardPage(container: HTMLElement): void {
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('main')
+
+  // Equivalente ao import pageHTML — captura o HTML renderizado pelo Jinja
+  const pageHTML = container.innerHTML
+
   state = {
     municipios: [],
     indices: [],
@@ -255,19 +244,44 @@ export function initDataDashboardPage(container: HTMLElement): void {
       <p class="dataDashboardPage__loadingText text-sm">Carregando dados...</p>
     </div>
   `
-  createIcons({ icons: { Loader2 } })
+  lucide.createIcons()
 
-  getDashboardData()
+  fetch('/api/dashboard')
+    .then(r => r.json())
     .then(data => {
-      state.municipios = data.municipios
-      state.indices = data.indices
+      state.municipios = data.municipios ?? []
+      state.indices = data.indices ?? []
 
       container.innerHTML = pageHTML
-      createIcons({ icons: { Info, ArrowRight, SlidersHorizontal, Map: LucideMap, RefreshCw, Search, Download, ChevronDown } })
+      lucide.createIcons()
 
-      // Popula containers dinâmicos
+      if (state.municipios.length === 0 && state.indices.length === 0) {
+        const filterWrapper = container.querySelector('section.filters')?.closest('.dataDashboardPage__background')
+        const mapWrapper = container.querySelector('section.map')?.closest('.dataDashboardPage__background')
+        const comparativoWrapper = container.querySelector('section.comparativo')?.closest('.dataDashboardPage__background')
+        const downloadWrapper = container.querySelector('section.download')?.closest('.dataDashboardPage__background')
+
+        const emptyEl = document.createElement('div')
+        emptyEl.className = 'dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding py-16'
+        emptyEl.innerHTML = `
+          <div class="dataDashboardPage__empty mx-auto max-w-width-size flex flex-col items-center justify-center gap-4 text-neutral-400">
+            <i data-lucide="database" class="dataDashboardPage__emptyIcon opacity-30" width="48" height="48"></i>
+            <p class="dataDashboardPage__emptyText text-[0.9375rem] text-center">
+              Nenhum dado disponível no momento.
+            </p>
+          </div>
+        `
+
+        filterWrapper?.replaceWith(emptyEl)
+        mapWrapper?.remove()
+        comparativoWrapper?.remove()
+        downloadWrapper?.remove()
+        lucide.createIcons()
+        return
+      }
+
       const valueEl = container.querySelector('#indice-select-value')
-      if (valueEl) valueEl.textContent = `Índice 1 — ${state.indices[0]}`
+      if (valueEl && state.indices.length > 0) valueEl.textContent = `Índice 1 — ${state.indices[0]}`
 
       const dropdown = container.querySelector('#indice-select-dropdown')
       if (dropdown) dropdown.innerHTML = renderDropdownOptions()
@@ -278,19 +292,19 @@ export function initDataDashboardPage(container: HTMLElement): void {
       const chartPanel = container.querySelector('#chart-panel')
       if (chartPanel) {
         chartPanel.innerHTML = renderChartPanel()
-        createIcons({ icons: { BarChart2 } })
+        lucide.createIcons()
       }
 
       setupEvents(container)
       initMap()
     })
-    .catch((err: Error) => {
+    .catch(err => {
       container.innerHTML = `
         <div class="dataDashboardPage__error w-full flex flex-col items-center justify-center gap-4 py-32 text-neutral-400">
           <i data-lucide="alert-circle" class="dataDashboardPage__errorIcon text-red" width="40" height="40"></i>
           <p class="dataDashboardPage__errorText text-sm text-center max-w-xs">${err.message}</p>
         </div>
       `
-      createIcons({ icons: { AlertCircle } })
+      lucide.createIcons()
     })
-}
+})

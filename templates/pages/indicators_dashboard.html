@@ -1,6 +1,12 @@
-<div class="indicatorsDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) py-6">
-  <header class="header header--indicatorsDashboardPage mx-auto max-w-(--width-size) flex flex-col gap-4">
+{% extends "layout.html" %}
+
+{% block title %}Painel de Indicadores{% endblock %}
+
+{% block content %}
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding py-6">
+  <header class="header header--indicatorsDashboardPage mx-auto max-w-width-size flex flex-col gap-4">
     <h1 class="header__title header__title--indicatorsDashboardPage text-4xl font-semibold text-dark-cyan max-w-200">Painel de Indicadores</h1>
     <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Acompanhe os principais indicadores de saúde pública com visualizações interativas, comparações históricas e análises por região e período.</p>
   </header>
 </div>
+{% endblock %}

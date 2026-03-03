@@ -15,6 +15,9 @@
     --dark-blue: #0c326f;
     --dark-cyan: #037478;
     --cyan: #0bb19d;
+    --teal: #00796B;
+    --teal-dark: #004D40;
+    --teal-light: #E0F2F1;
     --green: #268744;
     --yellow: #ffd125;
     --red: #a23737;
@@ -29,6 +32,29 @@
     --neutral-neutral-100: #f1f1f1;
     --neutral-neutral-50: #f5f5f7;
     --neutral-neutral-0: #fff;
+
+    /* Aliases --color-* (usados nos CSS de componentes) */
+    --color-blue: #1351b4;
+    --color-dark-blue: #0c326f;
+    --color-dark-cyan: #037478;
+    --color-cyan: #0bb19d;
+    --color-teal: #00796B;
+    --color-teal-dark: #004D40;
+    --color-teal-light: #E0F2F1;
+    --color-green: #268744;
+    --color-yellow: #ffd125;
+    --color-red: #a23737;
+    --color-neutral-900: #000;
+    --color-neutral-600: #121212;
+    --color-neutral-500: #393939;
+    --color-neutral-400: #626262;
+    --color-neutral-300: #9a9a9a;
+    --color-neutral-200: #cacaca;
+    --color-neutral-175: #dcdcdc;
+    --color-neutral-150: #ebebeb;
+    --color-neutral-100: #f1f1f1;
+    --color-neutral-50: #f5f5f7;
+    --color-neutral-0: #fff;
 }
 
 *{

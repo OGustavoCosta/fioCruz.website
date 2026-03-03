@@ -1,0 +1,6 @@
+/* Base */
+@import "./base/typography.css";
+@import "./base/base.css";
+
+/* Páginas */
+@import "./pages/dataDashboardPage.css";

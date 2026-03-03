@@ -1,0 +1,41 @@
+{
+  "municipios": [
+    {
+      "nome": "São Paulo",
+      "uf": "SP",
+      "lat": -23.5505,
+      "lng": -46.6333,
+      "indice": 0.89,
+      "populacao": "12.3M",
+      "area": "1.521 km²",
+      "regiao": "Sudeste"
+    },
+    {
+      "nome": "Rio de Janeiro",
+      "uf": "RJ",
+      "lat": -22.9068,
+      "lng": -43.1729,
+      "indice": 0.82,
+      "populacao": "6.7M",
+      "area": "1.200 km²",
+      "regiao": "Sudeste"
+    },
+    {
+      "nome": "Brasília",
+      "uf": "DF",
+      "lat": -15.7942,
+      "lng": -47.8825,
+      "indice": 0.91,
+      "populacao": "3.0M",
+      "area": "5.779 km²",
+      "regiao": "Centro-Oeste"
+    }
+  ],
+  "indices": [
+    "Saúde Materno-Infantil",
+    "Cobertura de Atenção Básica",
+    "Saneamento e Habitação",
+    "Segurança Alimentar",
+    "Acesso a Medicamentos"
+  ]
+}

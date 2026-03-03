@@ -1,15 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Painel de Dados{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dataDashboardPage.css') }}" />
+{% endblock %}
+
+{% block content %}
+
 <!-- Título da página -->
-<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) py-8 bg-neutral-50">
-  <header class="header header--dataDashboardPage mx-auto max-w-(--width-size) flex flex-col gap-3">
+<div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding py-8">
+  <header class="header header--dataDashboardPage mx-auto max-w-width-size flex flex-col gap-3">
     <h1 class="header__title header__title--dataDashboardPage text-4xl font-semibold text-dark-cyan max-w-200">Observatório da Saúde para a Agenda 2030</h1>
     <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Explore dados atualizados sobre indicadores de desenvolvimento sustentável em saúde no Brasil. Utilize os filtros para visualizar distribuição geográfica e realizar comparações municipais detalhadas.</p>
   </header>
 </div>
 
 <!-- Informativo -->
-<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+<div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
   <section class="info">
-    <div class="dataDashboardPage__infoContent mx-auto max-w-(--width-size)">
+    <div class="dataDashboardPage__infoContent mx-auto max-w-width-size">
       <div class="dataDashboardPage__infoBox bg-gradient-to-br from-teal-light to-white border-l-4 border-teal rounded-xl p-5">
         <h2 class="dataDashboardPage__infoTitle text-xl font-semibold text-teal-dark mb-3 flex items-center gap-2">
           <i data-lucide="info" class="dataDashboardPage__infoIcon shrink-0" width="20" height="20"></i>
@@ -31,9 +42,9 @@
 </div>
 
 <!-- Filtros -->
-<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+<div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
   <section class="filters">
-    <div class="dataDashboardPage__filtersContent mx-auto max-w-(--width-size) bg-gradient-to-br from-teal to-teal-dark rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,121,107,0.15)]">
+    <div class="dataDashboardPage__filtersContent mx-auto max-w-width-size bg-gradient-to-br from-teal to-teal-dark rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,121,107,0.15)]">
       <h2 class="dataDashboardPage__filtersTitle text-xl font-semibold text-white mb-5 flex items-center gap-2">
         <i data-lucide="sliders-horizontal" class="dataDashboardPage__filtersTitleIcon shrink-0" width="20" height="20"></i>
         Filtros de Visualização
@@ -64,11 +75,9 @@
               id="indice-select-trigger"
               class="dataDashboardPage__selectTrigger w-full flex items-center justify-between gap-3 px-4 py-3 border-2 border-white/20 rounded-lg bg-white/95 text-[0.9375rem] text-neutral-500 hover:bg-white hover:border-white/40 transition-all cursor-pointer"
             >
-              <!-- JS: atualizado com "Índice N — <nome>" após getDashboardData() -->
               <span id="indice-select-value" class="dataDashboardPage__selectValue truncate">—</span>
               <i data-lucide="chevron-down" id="indice-select-chevron" class="dataDashboardPage__selectChevron shrink-0 text-neutral-400 transition-transform duration-200" width="18" height="18"></i>
             </button>
-            <!-- JS: populado com renderDropdownOptions() após getDashboardData() -->
             <ul id="indice-select-dropdown" class="dataDashboardPage__selectDropdown absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-neutral-150 z-50 overflow-hidden max-h-64 overflow-y-auto hidden"></ul>
           </div>
         </div>
@@ -83,13 +92,8 @@
   </section>
 </div>
 
-<!-- -------------------------------------------------------------- -->
-<!-- Deixei o MAPA e o COMPARATIVO MUNICIPAL em css padrão para facilitar o seu uso -->
-<!-- Observação: as demais seções utiliza tailwind css (por isso tem esse monte de classes) -->
-<!-- -------------------------------------------------------------- -->
-
 <!-- Mapa -->
-<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+<div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
   <section class="map">
     <div class="dataDashboardPage__mapContent">
       <div class="dataDashboardPage__mapHeader">
@@ -97,7 +101,6 @@
         <i data-lucide="map" class="dataDashboardPage__mapIcon" width="20" height="20"></i>
       </div>
       <div class="dataDashboardPage__mapContainer">
-        <!-- JS: mapa Leaflet inicializado por initMap() com circleMarkers por município -->
         <div id="leaflet-map" class="dataDashboardPage__mapLeaflet"></div>
       </div>
     </div>
@@ -105,7 +108,7 @@
 </div>
 
 <!-- Comparativo Municipal -->
-<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-6 bg-neutral-50">
+<div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
   <section class="comparativo">
     <div class="dataDashboardPage__comparativoContent">
       <div class="dataDashboardPage__comparativoHeader">
@@ -125,12 +128,10 @@
             />
             <i data-lucide="search" class="dataDashboardPage__municipiosBuscaIcon" width="16" height="16"></i>
           </div>
-          <!-- JS: populado com renderMunicipiosList() após getDashboardData(); re-renderizado ao buscar ou selecionar -->
           <ul id="municipios-list" class="dataDashboardPage__municipiosList"></ul>
         </div>
 
         <!-- Gráfico -->
-        <!-- JS: populado com renderChartPanel() — estado vazio ou painel com gráfico do município selecionado -->
         <div id="chart-panel" class="dataDashboardPage__chartPanel"></div>
       </div>
     </div>
@@ -138,9 +139,9 @@
 </div>
 
 <!-- Exportar -->
-<div class="dataDashboardPage__background w-full px-(--mobile-padding) sm:px-(--desktop-padding) pb-8 bg-neutral-50">
+<div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-8">
   <section class="download">
-    <div class="dataDashboardPage__downloadContent mx-auto max-w-(--width-size) bg-white rounded-xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] flex flex-col sm:flex-row items-start sm:items-center justify-between flex-wrap gap-4">
+    <div class="dataDashboardPage__downloadContent mx-auto max-w-width-size bg-white rounded-xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] flex flex-col sm:flex-row items-start sm:items-center justify-between flex-wrap gap-4">
       <div class="dataDashboardPage__downloadInfo flex-1 min-w-60">
         <h2 class="dataDashboardPage__downloadTitle text-[1.125rem] font-semibold text-neutral-500 mb-2">Exportar Dados</h2>
         <p class="dataDashboardPage__downloadSubtitle text-sm text-neutral-400">Faça o download dos dados filtrados em diferentes formatos para análise offline.</p>
@@ -162,3 +163,10 @@
     </div>
   </section>
 </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/data_dashboard.js') }}"></script>
+{% endblock %}

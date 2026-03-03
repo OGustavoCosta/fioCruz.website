@@ -1,24 +1,33 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
 
-node_modules
-dist
-dist-ssr
-*.local
+# Virtual environment
+fiocruz-venv/
+venv/
+.venv/
+env/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Flask
+instance/
+.env
+.flaskenv
+*.env
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
