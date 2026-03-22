@@ -1,0 +1,122 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  font-size: 16px;
+  border: 2px solid #001F3F;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #001F3F;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.custom-select:hover,
+.custom-select:focus {
+  background-color: rgba(0, 31, 63, 0.1);
+  border-color: #002A5E;
+  outline: none;
+}
+
+.layout-mapa {
+  height: 90vh;          /* altura total do bloco */
+}
+
+.layout-mapa > div {
+  height: 100%;          /* colunas ocupam toda a altura */
+}
+
+.lista-wrapper {
+    border: 1px solid #dee2e6;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 8px;
+}
+
+/* Scroll apenas interno */
+.lista-scroll {
+    max-height: 49vh;
+    overflow-y: auto;
+}
+
+
+.scroll-col {
+  max-height: 450px;
+  overflow-y: auto;
+
+  border: 1px solid #dee2e6;   /* borda suave estilo Bootstrap */
+  border-radius: 12px;         /* cantos arredondados */
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.grafico-container {
+  position: relative;
+  height: 380px;   /* 👈 ajuste aqui */
+  width: 100%;
+}
+
+#map {
+  width: 100%;
+  height: 60vh;
+  min-height: 500px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ⚙️ Comportamento responsivo */
+@media (max-width: 992px) {
+  #map {
+    width: 100%;
+    height: 60vh;             /* um pouco menor em telas pequenas */
+    margin-top: 15px;         /* separação entre lista e mapa */
+  }
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;        /* opcional */
+  box-sizing: border-box;
+}
+
+/* Botão preenchido (ativo) */
+.btn-primary {
+  background-color: #001F3F !important;   /* azul marinho */
+  border-color: #001F3F !important;
+  color: #fff !important;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #002A5E !important;   /* um pouco mais claro ao passar o mouse */
+  border-color: #002A5E !important;
+}
+
+/* Botão contornado (inativo) */
+.btn-outline-primary {
+  background-color: transparent !important;
+  color: #001F3F !important;
+  border: 2px solid #001F3F !important;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: rgba(0, 31, 63, 0.1) !important; /* leve transparência */
+  color: #001F3F !important;
+  border-color: #001F3F !important;
+}
+
+
+
+
+

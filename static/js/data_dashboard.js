@@ -1,310 +1,828 @@
-// ---- Leaflet instance ----
+// -----------------------------
+// Estado Global
+// -----------------------------
 let leafletMapInstance = null
+let geojsonLayer = null
 
-// ---- Helpers ----
-function getCorHexIndice(indice) {
-  if (indice >= 0.85) return '#168821'
-  if (indice >= 0.75) return '#4CAF50'
-  if (indice >= 0.70) return '#FDB813'
-  if (indice >= 0.65) return '#FF8C42'
-  return '#E52207'
-}
-
-// ---- State ----
 let state = {
-  municipios: [],
-  indices: [],
-  iedSelecionado: 1,
+  municipioSelecionado: null,
+  comparacaoSelecionada: "IED",
+  geojson: null,
+  regiaoSelecionada: "Brasil",
   indiceSelecionado: 0,
   dropdownOpen: false,
-  busca: '',
-  municipioSelecionado: null,
+  indiceComparacao: "Ind_mun",
+
+  indices: [
+    { value: "Ind_mun", label: "Índice Municipal de Desenvolvimento Sustentável em Saúde (IMDSS)" },
+    { value: "Ind_rep_materna", label: "Saúde reprodutiva e materna" },
+    { value: "Ind_rn_cr", label: "Saúde neonatal e da criança" },
+    { value: "Ind_doen_infec", label: "Doenças infecciosas" },
+    { value: "Ind_doen_nt", label: "Doenças crônicas não transmissíveis" },
+    { value: "Ind_les_viol", label: "Lesões e violências" },
+    { value: "Ind_risc_amb", label: "Riscos ambientais" },
+    { value: "Ind_cob_saude", label: "Cobertura universal de saúde e sistemas de saúde" }
+  ],
+
+
+  paletas: {
+  Ind_mun: ["#eef6fb", "#3a7fb6"],
+  Ind_rep_materna: ["#eef9f3", "#4aa879"],
+  Ind_rn_cr: ["#fbf6ed", "#c8a97e"],
+  Ind_doen_infec: ["#f6f2fb", "#9a7fd1"],
+  Ind_doen_nt: ["#edf6f8", "#4f8f9d"],
+  Ind_les_viol: ["#f4f6f8", "#7b8a9a"],
+  Ind_risc_amb: ["#f4f8ed", "#7ea85b"],
+  Ind_cob_saude: ["#eef9f9", "#49a6a6"]
+
+}
 }
 
-// ---- Partials ----
+// -----------------------------
+// Função para pegar cor da paleta
+// -----------------------------
+function getCorPaleta(valor) {
+
+  const v = Math.max(0, Math.min(1, Number(valor ?? 0)))
+
+  function interp(c1, c2, t) {
+    return {
+      r: Math.round(c1.r + (c2.r - c1.r) * t),
+      g: Math.round(c1.g + (c2.g - c1.g) * t),
+      b: Math.round(c1.b + (c2.b - c1.b) * t)
+    }
+  }
+
+  let start, end, t
+
+  // TIER 1 (0 – 0.40)
+  if (v <= 0.40) {
+
+    start = { r: 255, g: 205, b: 210 } // vermelho claro
+    end   = { r: 183, g: 28,  b: 28 }  // vermelho forte
+
+    t = v / 0.40
+  }
+
+  // TIER 2 (0.41 – 0.69)
+  else if (v <= 0.69) {
+
+    start = { r: 255, g: 249, b: 196 } // amarelo claro
+    end   = { r: 251, g: 192, b: 45 }  // amarelo forte
+
+    t = (v - 0.41) / (0.69 - 0.41)
+  }
+
+  // TIER 3 (0.70 – 1)
+  else {
+
+    start = { r: 200, g: 230, b: 201 } // verde claro
+    end   = { r: 27,  g: 94,  b: 32 }  // verde forte
+
+    t = (v - 0.70) / (1 - 0.70)
+  }
+
+  const c = interp(start, end, t)
+
+  return `rgb(${c.r},${c.g},${c.b})`
+}
+
+function getCorTier(valor){
+
+  const v = Math.max(0, Math.min(1, Number(valor ?? 0)))
+
+  function interp(c1, c2, t){
+    return {
+      r: Math.round(c1.r + (c2.r - c1.r) * t),
+      g: Math.round(c1.g + (c2.g - c1.g) * t),
+      b: Math.round(c1.b + (c2.b - c1.b) * t)
+    }
+  }
+
+  let start, end, t
+
+  // 0 – 0.40
+  if(v <= 0.40){
+    start = {r:255,g:205,b:210}
+    end   = {r:183,g:28,b:28}
+    t = v / 0.40
+  }
+
+  // 0.41 – 0.69
+  else if(v <= 0.69){
+    start = {r:255,g:249,b:196}
+    end   = {r:251,g:192,b:45}
+    t = (v - 0.41) / (0.69 - 0.41)
+  }
+
+  // 0.70 – 1
+  else{
+    start = {r:200,g:230,b:201}
+    end   = {r:27,g:94,b:32}
+    t = (v - 0.70) / (1 - 0.70)
+  }
+
+  const c = interp(start,end,t)
+
+  return `rgb(${c.r},${c.g},${c.b})`
+}
+
+function hexToRgb(hex) {
+
+  const bigint = parseInt(hex.replace("#",""), 16)
+
+  return {
+    r: (bigint >> 16) & 255,
+    g: (bigint >> 8) & 255,
+    b: bigint & 255
+  }
+}
+
+// -----------------------------
+// Atualiza cores do mapa
+// -----------------------------
+
+function atualizarCoresMapa() {
+
+  if (!geojsonLayer || !state.geojson) return
+
+  const indiceKey = state.indices[state.indiceSelecionado].value
+  const paleta = state.paletas[indiceKey]
+
+  let somaBrasil = 0
+  let countBrasil = 0
+
+  let somaRegiao = 0
+  let countRegiao = 0
+
+  const somaIED = {}
+  const countIED = {}
+
+  let min = Infinity
+  let max = -Infinity
+
+  // -------- PRÉ-CÁLCULO (apenas uma vez) --------
+  state.geojson.features.forEach(f => {
+
+    const p = f.properties
+    const valor = Number(p[indiceKey])
+
+    if (isNaN(valor)) return
+
+    somaBrasil += valor
+    countBrasil++
+
+    if (valor < min) min = valor
+    if (valor > max) max = valor
+
+    if (p.SIGLA_RG === state.regiaoSelecionada) {
+      somaRegiao += valor
+      countRegiao++
+    }
+
+    if (!somaIED[p.IED]) {
+      somaIED[p.IED] = 0
+      countIED[p.IED] = 0
+    }
+
+    somaIED[p.IED] += valor
+    countIED[p.IED]++
+  })
+
+  const mediaBrasil = somaBrasil / countBrasil
+
+  const mediaRegiao =
+    countRegiao > 0
+      ? somaRegiao / countRegiao
+      : null
+
+  // -------- LOOP DO MAPA --------
+  geojsonLayer.eachLayer(layer => {
+
+    const p = layer.feature.properties
+    const valor = Number(p[indiceKey])
+
+    const pertence =
+      state.regiaoSelecionada === "Brasil" ||
+      p.SIGLA_RG === state.regiaoSelecionada
+
+    if (!pertence) {
+
+      layer.setStyle({
+        fillColor: "#eeeeee",
+        color: "#cccccc",
+        weight: 1,
+        fillOpacity: 1
+      })
+
+      layer.unbindTooltip()
+      return
+    }
+
+    layer.setStyle({
+      fillColor: getCorPaleta(valor),
+      color: "#cccccc",
+      weight: 0.8,
+      fillOpacity: 0.9
+    })
+
+    const mediaIED =
+      somaIED[p.IED] / countIED[p.IED]
+
+    // -------- TOOLTIP --------
+    let conteudo = `
+      <div style="font-size:13px; line-height:1.5">
+        <strong>${p.NM_MUN} — ${p.UF}</strong><br>
+        Região: ${p.NM_REGIA}<br>
+        População (2022): ${Number(p.populacao_2022).toLocaleString('pt-BR')}<br>
+        Área (km²): ${Number(p.AREA_KM2).toLocaleString('pt-BR', {minimumFractionDigits:2})}<br><br>
+        <strong>${state.indices[state.indiceSelecionado].label}</strong><br>
+        Município: ${valor.toFixed(3)}<br>
+        Média Brasil: ${mediaBrasil.toFixed(3)}<br>
+        Média comparáveis por IED*: ${mediaIED.toFixed(3)}
+    `
+
+    if (state.regiaoSelecionada !== "Brasil" && mediaRegiao !== null) {
+      conteudo += `<br>Média Região: ${mediaRegiao.toFixed(3)}`
+    }
+
+    conteudo += `</div>`
+
+    layer.bindTooltip(conteudo, {
+      sticky: true,
+      direction: "auto",
+      opacity: 0.95,
+      className: "map-tooltip"
+    })
+  })
+}
+
+// -----------------------------
+// Zoom por região
+// -----------------------------
+function zoomParaRegiao() {
+
+  if (!leafletMapInstance || !geojsonLayer) return
+
+  if (state.regiaoSelecionada === "Brasil") {
+    leafletMapInstance.flyTo([-14.235, -51.925], 4, { duration: 0.5 })
+    return
+  }
+
+  let bounds = null
+
+  geojsonLayer.eachLayer(layer => {
+    if (layer.feature.properties.SIGLA_RG === state.regiaoSelecionada) {
+      if (!bounds) bounds = layer.getBounds()
+      else bounds.extend(layer.getBounds())
+    }
+  })
+
+  if (!bounds) return
+
+  leafletMapInstance.flyToBounds(bounds, {
+    padding: [20, 20],
+    maxZoom: 8,
+    duration: 0.5
+  })
+}
+
+// -----------------------------
+// Filtra municípios
+// -----------------------------
 function getMunicipiosFiltrados() {
-  return state.municipios.filter(m =>
-    m.nome.toLowerCase().includes(state.busca.toLowerCase()) ||
-    m.uf.toLowerCase().includes(state.busca.toLowerCase())
-  )
+
+  if (!state.geojson) return []
+
+  const buscaInput = document.getElementById("municipios-busca")
+
+  const busca = buscaInput
+    ? buscaInput.value.toLowerCase().trim()
+    : ""
+
+  return state.geojson.features.filter(f => {
+
+    const nome = f.properties.NM_MUN.toLowerCase()
+
+    if (busca && !nome.includes(busca)) return false
+
+    return true
+
+  })
+
 }
 
 function renderMunicipiosList() {
+
   const filtrados = getMunicipiosFiltrados()
+
   if (filtrados.length === 0) {
     return '<li class="dataDashboardPage__municipiosEmpty text-sm text-neutral-400 py-4 text-center">Nenhum município encontrado.</li>'
   }
-  return filtrados.map(m => `
-    <li class="dataDashboardPage__municipiosItem">
-      <button
-        data-municipio="${m.nome}"
-        class="dataDashboardPage__municipiosCard w-full text-left p-4 rounded-xl border-l-4 border-teal bg-gradient-to-br from-white to-teal-light transition-all duration-300 cursor-pointer hover:translate-x-1 hover:shadow-[0_4px_12px_rgba(0,121,107,0.15)] hover:border-l-[6px] ${state.municipioSelecionado === m.nome ? 'translate-x-1 shadow-[0_4px_12px_rgba(0,121,107,0.15)] !border-l-[6px]' : ''}"
-      >
-        <div class="dataDashboardPage__municipiosNomeRow mb-2">
-          <span class="dataDashboardPage__municipiosNome text-base font-bold text-neutral-500">${m.nome}</span>
-          <span class="dataDashboardPage__municipiosUf inline-block bg-teal text-white text-[11px] font-bold px-2 py-0.5 rounded ml-2">${m.uf}</span>
-        </div>
-        <div class="dataDashboardPage__municipiosIndiceRow flex items-baseline gap-2">
-          <span class="dataDashboardPage__municipiosIndice text-[1.75rem] font-bold text-teal">${m.indice.toFixed(2)}</span>
-          <span class="dataDashboardPage__municipiosIndiceLabel text-xs text-neutral-400 font-medium">IMDSS</span>
-        </div>
-        <div class="dataDashboardPage__municipiosDados grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-teal-light">
-          <div class="dataDashboardPage__municipiosDado text-xs">
-            <span class="dataDashboardPage__municipiosDadoLabel block text-neutral-400 font-medium">População</span>
-            <span class="dataDashboardPage__municipiosDadoValor block text-neutral-500 font-semibold mt-0.5">${m.populacao}</span>
-          </div>
-          <div class="dataDashboardPage__municipiosDado text-xs">
-            <span class="dataDashboardPage__municipiosDadoLabel block text-neutral-400 font-medium">Área</span>
-            <span class="dataDashboardPage__municipiosDadoValor block text-neutral-500 font-semibold mt-0.5">${m.area}</span>
-          </div>
-          <div class="dataDashboardPage__municipiosDado text-xs">
-            <span class="dataDashboardPage__municipiosDadoLabel block text-neutral-400 font-medium">Região</span>
-            <span class="dataDashboardPage__municipiosDadoValor block text-neutral-500 font-semibold mt-0.5">${m.regiao}</span>
-          </div>
-        </div>
-      </button>
-    </li>
-  `).join('')
-}
 
-function renderChartPanel() {
-  const municipioAtual = state.municipios.find(m => m.nome === state.municipioSelecionado) ?? null
-  if (municipioAtual) {
+  const indiceKey = state.indiceComparacao || "Ind_mun"
+
+  return filtrados.map(m => {
+
+    const p = m.properties
+
+    const nome = p.NM_MUN
+    const uf = p.UF
+    const regiao = p.NM_REGIA
+    const populacao = Number(p.populacao_2022).toLocaleString('pt-BR')
+    const area = Number(p.AREA_KM2).toLocaleString('pt-BR', {minimumFractionDigits:2})
+    const indice = Number(p[indiceKey] ?? 0)
+
     return `
-      <div class="dataDashboardPage__chartWrapper flex flex-col gap-3 flex-1">
-        <h3 class="dataDashboardPage__chartTitle text-sm font-semibold text-neutral-500">
-          ${municipioAtual.nome} — ${municipioAtual.uf}
-        </h3>
-        <div class="dataDashboardPage__chartContainer flex-1 min-h-[400px] bg-white border border-neutral-175 rounded-lg flex items-center justify-center">
-          <p class="dataDashboardPage__chartPlaceholder text-neutral-400 text-sm">Gráfico comparativo de índices</p>
-        </div>
-      </div>
+      <li class="dataDashboardPage__municipiosItem">
+        <button
+          data-municipio="${nome}"
+          data-uf="${uf}"
+          class="dataDashboardPage__municipiosCard w-full text-left p-4 rounded-xl border-l-4 border-teal bg-gradient-to-br from-white to-teal-light transition-all duration-300 cursor-pointer hover:translate-x-1 hover:shadow-[0_4px_12px_rgba(0,121,107,0.15)] hover:border-l-[6px] ${state.municipioSelecionado === nome ? 'translate-x-1 shadow-[0_4px_12px_rgba(0,121,107,0.15)] !border-l-[6px]' : ''}"
+        >
+
+          <div class="dataDashboardPage__municipiosNomeRow mb-2">
+            <span class="dataDashboardPage__municipiosNome text-base font-bold text-neutral-500">${nome}</span>
+            <span class="dataDashboardPage__municipiosUf inline-block bg-teal text-white text-[11px] font-bold px-2 py-0.5 rounded ml-2">${uf}</span>
+          </div>
+
+          <div class="dataDashboardPage__municipiosIndiceRow flex items-baseline gap-2">
+            <span class="dataDashboardPage__municipiosIndice text-[1.75rem] font-bold text-teal">${indice.toFixed(2)}</span>
+            <span class="dataDashboardPage__municipiosIndiceLabel text-xs text-neutral-400 font-medium">${state.indices[state.indiceSelecionado].label}</span>
+          </div>
+
+          <div class="dataDashboardPage__municipiosDados grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-teal-light">
+
+            <div class="dataDashboardPage__municipiosDado text-xs">
+              <span class="dataDashboardPage__municipiosDadoLabel block text-neutral-400 font-medium">População</span>
+              <span class="dataDashboardPage__municipiosDadoValor block text-neutral-500 font-semibold mt-0.5">${populacao}</span>
+            </div>
+
+            <div class="dataDashboardPage__municipiosDado text-xs">
+              <span class="dataDashboardPage__municipiosDadoLabel block text-neutral-400 font-medium">Área</span>
+              <span class="dataDashboardPage__municipiosDadoValor block text-neutral-500 font-semibold mt-0.5">${area} km²</span>
+            </div>
+
+            <div class="dataDashboardPage__municipiosDado text-xs">
+              <span class="dataDashboardPage__municipiosDadoLabel block text-neutral-400 font-medium">Região</span>
+              <span class="dataDashboardPage__municipiosDadoValor block text-neutral-500 font-semibold mt-0.5">${regiao}</span>
+            </div>
+
+          </div>
+
+        </button>
+      </li>
     `
-  }
-  return `
-    <div class="dataDashboardPage__chartEmpty flex-1 flex flex-col items-center justify-center gap-4 text-neutral-400">
-      <i data-lucide="bar-chart-2" class="dataDashboardPage__chartEmptyIcon opacity-30" width="48" height="48"></i>
-      <p class="dataDashboardPage__chartEmptyText text-[0.9375rem] text-center">
-        Selecione um município na lista ao lado<br>para visualizar o comparativo de índices
-      </p>
-    </div>
-  `
+  }).join('')
 }
 
-function renderDropdownOptions() {
-  return state.indices.map((option, i) => `
-    <li class="dataDashboardPage__selectOption">
-      <button
-        type="button"
-        data-indice="${i}"
-        class="dataDashboardPage__selectOptionBtn w-full flex items-center justify-between gap-3 px-4 py-3 text-sm text-left transition-colors cursor-pointer ${state.indiceSelecionado === i ? 'bg-teal-light text-teal font-semibold' : 'text-neutral-500 hover:bg-neutral-50'}"
-      >
-        <span class="dataDashboardPage__selectOptionLabel">
-          <span class="dataDashboardPage__selectOptionIndex text-xs font-bold text-neutral-300 mr-2">
-            ${String(i + 1).padStart(2, '0')}
-          </span>
-          ${option}
-        </span>
-        ${state.indiceSelecionado === i ? `<i data-lucide="check" class="dataDashboardPage__selectOptionCheck shrink-0 text-teal" width="15" height="15"></i>` : ''}
-      </button>
-    </li>
-  `).join('')
-}
-
-// ---- Map ----
+// -----------------------------
+// Inicializa mapa
+// -----------------------------
 function initMap() {
-  if (leafletMapInstance) {
-    try { leafletMapInstance.remove() } catch { /* container já removido */ }
-    leafletMapInstance = null
-  }
 
-  const mapEl = document.getElementById('leaflet-map')
-  if (!mapEl) return
+  const mapEl = document.getElementById("leaflet-map")
+  if (!mapEl || !state.geojson) return
 
-  leafletMapInstance = L.map(mapEl).setView([-14.235, -51.925], 4)
+  leafletMapInstance = L.map(mapEl, {
+    renderer: L.canvas(),
+    minZoom: 4,
+    maxZoom: 10,
+    zoomControl: true,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false
+  }).setView([-14.235, -51.925], 4)
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  L.rectangle(
+    [[-90, -180], [90, 180]],
+    { color: "#ffffff", weight: 0, fillOpacity: 1 }
+  ).addTo(leafletMapInstance)
+
+  geojsonLayer = L.geoJSON(state.geojson, {
+    renderer: L.canvas(),
+    style: () => ({
+      fillColor: "#cccccc",
+      color: "#ffffff",
+      weight: 0.8,
+      fillOpacity: 0.8
+    })
   }).addTo(leafletMapInstance)
 
-  state.municipios.forEach(m => {
-    L.circleMarker([m.lat, m.lng], {
-      fillColor: getCorHexIndice(m.indice),
-      fillOpacity: 0.85,
-      color: '#fff',
-      weight: 2,
-      radius: 8,
-    })
-      .bindPopup(`<strong>${m.nome} — ${m.uf}</strong><br>Índice: <strong>${m.indice.toFixed(2)}</strong><br>Pop.: ${m.populacao}<br>Região: ${m.regiao}`)
-      .addTo(leafletMapInstance)
-  })
+  leafletMapInstance.fitBounds(geojsonLayer.getBounds())
+
+  atualizarCoresMapa()
 }
 
-// ---- Events ----
-function setupMunicipioEvents(container) {
-  container.querySelectorAll('[data-municipio]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.municipioSelecionado = btn.dataset.municipio ?? null
+// -----------------------------
+// Toggle Região
+// -----------------------------
+function ativarToggleRegiao() {
 
-      const listEl = container.querySelector('#municipios-list')
-      if (listEl) {
-        listEl.innerHTML = renderMunicipiosList()
-        setupMunicipioEvents(container)
-      }
+  const botoes = document.querySelectorAll("#modo-toggle button")
 
-      const chartPanel = container.querySelector('#chart-panel')
-      if (chartPanel) {
-        chartPanel.innerHTML = renderChartPanel()
-        lucide.createIcons()
-      }
-    })
-  })
-}
+  botoes.forEach(btn => {
+    btn.addEventListener("click", function () {
 
-function setupEvents(container) {
-  // IED buttons
-  container.querySelectorAll('[data-ied]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.iedSelecionado = parseInt(btn.dataset.ied ?? '1')
-      container.querySelectorAll('[data-ied]').forEach(b => {
-        const isActive = parseInt(b.dataset.ied ?? '') === state.iedSelecionado
-        b.className = `dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer ${isActive ? 'bg-white text-teal shadow-[0_2px_8px_rgba(0,0,0,0.2)]' : 'bg-transparent text-white hover:bg-white/15'}`
+      botoes.forEach(b => {
+        b.classList.remove("bg-white","text-teal","shadow-[0_2px_8px_rgba(0,0,0,0.2)]")
+        b.classList.add("bg-transparent","text-white")
       })
+
+      this.classList.remove("bg-transparent","text-white")
+      this.classList.add("bg-white","text-teal","shadow-[0_2px_8px_rgba(0,0,0,0.2)]")
+
+      state.regiaoSelecionada = this.dataset.regiao
+
+      atualizarCoresMapa()
+      zoomParaRegiao()
     })
   })
-
-  // Dropdown
-  const trigger = container.querySelector('#indice-select-trigger')
-  const dropdown = container.querySelector('#indice-select-dropdown')
-  const chevron = container.querySelector('#indice-select-chevron')
-
-  trigger?.addEventListener('click', () => {
-    state.dropdownOpen = !state.dropdownOpen
-    dropdown?.classList.toggle('hidden', !state.dropdownOpen)
-    chevron?.classList.toggle('rotate-180', state.dropdownOpen)
-  })
-
-  dropdown?.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-indice]')
-    if (!btn) return
-    state.indiceSelecionado = parseInt(btn.dataset.indice ?? '0')
-    state.dropdownOpen = false
-
-    const valueEl = container.querySelector('#indice-select-value')
-    if (valueEl) valueEl.textContent = `Índice ${state.indiceSelecionado + 1} — ${state.indices[state.indiceSelecionado]}`
-
-    dropdown.classList.add('hidden')
-    chevron?.classList.remove('rotate-180')
-    dropdown.innerHTML = renderDropdownOptions()
-    lucide.createIcons()
-  })
-
-  document.addEventListener('mousedown', (e) => {
-    const selectEl = container.querySelector('#indice-select')
-    if (selectEl && !selectEl.contains(e.target)) {
-      state.dropdownOpen = false
-      dropdown?.classList.add('hidden')
-      chevron?.classList.remove('rotate-180')
-    }
-  })
-
-  // Search
-  container.querySelector('#municipios-busca')?.addEventListener('input', (e) => {
-    state.busca = e.target.value
-    const listEl = container.querySelector('#municipios-list')
-    if (listEl) {
-      listEl.innerHTML = renderMunicipiosList()
-      setupMunicipioEvents(container)
-    }
-  })
-
-  setupMunicipioEvents(container)
 }
 
-// ---- Entry point ----
-document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('main')
+// -----------------------------
+// Dropdown Índice
+// -----------------------------
+function renderDropdownOptions() {
+  return state.indices.map((option, i) => `
+    <button
+      type="button"
+      data-indice="${i}"
+      class="w-full text-left px-4 py-3 text-sm transition-colors ${
+        state.indiceSelecionado === i
+          ? "bg-teal-light text-teal font-semibold"
+          : "text-neutral-500 hover:bg-neutral-50"
+      }"
+    >
+      ${option.label}
+    </button>
+  `).join("")
+}
 
-  // Equivalente ao import pageHTML — captura o HTML renderizado pelo Jinja
-  const pageHTML = container.innerHTML
+function ativarDropdownIndice() {
 
-  state = {
-    municipios: [],
-    indices: [],
-    iedSelecionado: 1,
-    indiceSelecionado: 0,
-    dropdownOpen: false,
-    busca: '',
-    municipioSelecionado: null,
-  }
+  const trigger = document.getElementById("indice-select-trigger")
+  const dropdown = document.getElementById("indice-select-dropdown")
+  const valueEl = document.getElementById("indice-select-value")
+  const chevron = document.getElementById("indice-select-chevron")
 
-  container.innerHTML = `
-    <div class="dataDashboardPage__loading w-full flex flex-col items-center justify-center gap-4 py-32 text-neutral-400">
-      <i data-lucide="loader-2" class="dataDashboardPage__loadingIcon text-teal animate-spin" width="40" height="40"></i>
-      <p class="dataDashboardPage__loadingText text-sm">Carregando dados...</p>
-    </div>
-  `
-  lucide.createIcons()
+  dropdown.innerHTML = renderDropdownOptions()
+  valueEl.textContent = state.indices[state.indiceSelecionado].label
 
-  fetch('/api/dashboard')
+  trigger.addEventListener("click", (e) => {
+    e.stopPropagation()
+    state.dropdownOpen = !state.dropdownOpen
+    dropdown.classList.toggle("hidden", !state.dropdownOpen)
+    chevron.classList.toggle("rotate-180", state.dropdownOpen)
+  })
+
+  dropdown.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-indice]")
+    if (!btn) return
+
+    state.indiceSelecionado = parseInt(btn.dataset.indice)
+    valueEl.textContent = state.indices[state.indiceSelecionado].label
+
+    state.dropdownOpen = false
+    dropdown.classList.add("hidden")
+    chevron.classList.remove("rotate-180")
+
+    dropdown.innerHTML = renderDropdownOptions()
+
+    atualizarCoresMapa()
+  })
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#indice-select")) {
+      dropdown.classList.add("hidden")
+      chevron.classList.remove("rotate-180")
+      state.dropdownOpen = false
+    }
+  })
+}
+
+// -----------------------------
+// Carregar Dados
+// -----------------------------
+function carregarDados() {
+
+  fetch("/api/dashboard")
     .then(r => r.json())
     .then(data => {
-      state.municipios = data.municipios ?? []
-      state.indices = data.indices ?? []
 
-      container.innerHTML = pageHTML
-      lucide.createIcons()
+      console.log("GeoJSON carregado:", data.features.length)
 
-      if (state.municipios.length === 0 && state.indices.length === 0) {
-        const filterWrapper = container.querySelector('section.filters')?.closest('.dataDashboardPage__background')
-        const mapWrapper = container.querySelector('section.map')?.closest('.dataDashboardPage__background')
-        const comparativoWrapper = container.querySelector('section.comparativo')?.closest('.dataDashboardPage__background')
-        const downloadWrapper = container.querySelector('section.download')?.closest('.dataDashboardPage__background')
+      state.geojson = data
 
-        const emptyEl = document.createElement('div')
-        emptyEl.className = 'dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding py-16'
-        emptyEl.innerHTML = `
-          <div class="dataDashboardPage__empty mx-auto max-w-width-size flex flex-col items-center justify-center gap-4 text-neutral-400">
-            <i data-lucide="database" class="dataDashboardPage__emptyIcon opacity-30" width="48" height="48"></i>
-            <p class="dataDashboardPage__emptyText text-[0.9375rem] text-center">
-              Nenhum dado disponível no momento.
-            </p>
-          </div>
-        `
+      const municipioRJ = data.features.find(f =>
+          f.properties.NM_MUN === "Rio de Janeiro" &&
+          f.properties.UF === "RJ"
+      )
 
-        filterWrapper?.replaceWith(emptyEl)
-        mapWrapper?.remove()
-        comparativoWrapper?.remove()
-        downloadWrapper?.remove()
-        lucide.createIcons()
-        return
+      if (municipioRJ) {
+          state.municipioSelecionado = municipioRJ
       }
 
-      const valueEl = container.querySelector('#indice-select-value')
-      if (valueEl && state.indices.length > 0) valueEl.textContent = `Índice 1 — ${state.indices[0]}`
+      state.municipios = data.features.map(f => f.properties)
 
-      const dropdown = container.querySelector('#indice-select-dropdown')
-      if (dropdown) dropdown.innerHTML = renderDropdownOptions()
-
-      const listEl = container.querySelector('#municipios-list')
-      if (listEl) listEl.innerHTML = renderMunicipiosList()
-
-      const chartPanel = container.querySelector('#chart-panel')
-      if (chartPanel) {
-        chartPanel.innerHTML = renderChartPanel()
-        lucide.createIcons()
-      }
-
-      setupEvents(container)
       initMap()
+
+      const listEl = document.querySelector("#municipios-list")
+      if (listEl) {
+        listEl.innerHTML = renderMunicipiosList()
+      }
+
+      atualizarGraficoComparacao()
+
+      const selectComparacao = document.getElementById("indice-select-comparacao")
+
+      if (selectComparacao) {
+
+        selectComparacao.addEventListener("change", function () {
+
+          state.indiceComparacao = this.value
+
+          const listEl = document.querySelector("#municipios-list")
+          if (listEl) {
+            listEl.innerHTML = renderMunicipiosList()
+          }
+
+        })
+
+      }
+
     })
-    .catch(err => {
-      container.innerHTML = `
-        <div class="dataDashboardPage__error w-full flex flex-col items-center justify-center gap-4 py-32 text-neutral-400">
-          <i data-lucide="alert-circle" class="dataDashboardPage__errorIcon text-red" width="40" height="40"></i>
-          <p class="dataDashboardPage__errorText text-sm text-center max-w-xs">${err.message}</p>
-        </div>
-      `
-      lucide.createIcons()
+    .catch(err => console.error(err))
+}
+
+
+let comparacaoChart = null
+
+function initComparacaoChart() {
+
+  const ctx = document.getElementById("comparacao-chart")
+
+  if (!ctx) return
+
+  comparacaoChart = new Chart(ctx, {
+
+    type: "bar",
+
+    data: {
+      labels: [
+        "Município",
+        "IED",
+        "Região",
+        "Estado",
+        "País"
+      ],
+
+      datasets: []
+    },
+
+    options: {
+
+      responsive: true,
+
+      plugins: {
+
+        legend: {
+          display: false
+        },
+
+        title: {
+          display: true,
+          text: "",
+          font: {
+            size: 16,
+            weight: "bold"
+          },
+          padding: {
+            bottom: 10
+          }
+        },
+
+        tooltip: {
+          callbacks: {
+
+            label: function(context) {
+
+              const valor = context.raw.toFixed(3)
+
+              const nomeMunicipio =
+                state.municipioSelecionado?.properties?.NM_MUN || "Município"
+
+              let nomeReferencia = "Referência"
+
+              if(state.comparacaoSelecionada === "IED")
+                nomeReferencia = "Média IED"
+
+              if(state.comparacaoSelecionada === "REGIAO")
+                nomeReferencia = "Média Região"
+
+              if(state.comparacaoSelecionada === "ESTADO")
+                nomeReferencia = "Média Estado"
+
+              if(state.comparacaoSelecionada === "PAIS")
+                nomeReferencia = "Média País"
+
+              if(context.datasetIndex === 0){
+                return `${nomeMunicipio}: ${valor}`
+              } else {
+                return `${nomeReferencia}: ${valor}`
+              }
+
+            }
+
+          }
+        }
+
+      },
+
+      scales: {
+
+        y: {
+          beginAtZero: true,
+          max: 1,
+          ticks: {
+            stepSize: 0.2
+          }
+        },
+
+        x: {
+          grid: {
+            display: false
+          }
+        }
+
+      }
+
+    }
+
+  })
+
+}
+
+function ativarToggleComparacao(){
+
+  const botoes = document.querySelectorAll("#modo-toggle-comparacao button")
+
+  botoes.forEach(btn => {
+
+    btn.addEventListener("click", function(){
+
+      botoes.forEach(b=>{
+        b.classList.remove("bg-white","text-teal")
+        b.classList.add("bg-transparent","text-white")
+      })
+
+      this.classList.remove("bg-transparent","text-white")
+      this.classList.add("bg-white","text-teal")
+
+      state.comparacaoSelecionada = this.dataset.comparacao
+
+      atualizarGraficoComparacao()
+
     })
+
+  })
+
+}
+
+function ativarCliqueMunicipio() {
+
+  document.addEventListener("click", function(e){
+
+    const card = e.target.closest("[data-municipio]")
+    if(!card) return
+
+    const nome = card.dataset.municipio
+    const uf = card.dataset.uf
+
+    const municipio = state.geojson.features.find(f =>
+      f.properties.NM_MUN === nome && f.properties.UF === uf
+    )
+
+    if(!municipio) return
+
+    state.municipioSelecionado = municipio
+
+    atualizarGraficoComparacao()
+
+  })
+
+}
+
+function calcularMediaGrupo(campo, valor, indice){
+
+  let soma = 0
+  let count = 0
+
+  state.geojson.features.forEach(f => {
+
+    if(valor === "PAIS" || f.properties[campo] === valor){
+
+      const v = Number(f.properties[indice])
+
+      if(!isNaN(v)){
+        soma += v
+        count++
+      }
+
+    }
+
+  })
+
+  return count > 0 ? soma / count : 0
+
+}
+
+function atualizarGraficoComparacao(){
+
+  if(!state.municipioSelecionado || !comparacaoChart) return
+
+  const p = state.municipioSelecionado.properties
+
+  comparacaoChart.options.plugins.title.text =
+  `${p.NM_MUN} — ${p.UF}`
+
+  const indices = state.indices.map(i => i.value)
+
+  const valoresMunicipio = []
+  const valoresGrupo = []
+
+  indices.forEach(indice => {
+
+    valoresMunicipio.push(Number(p[indice]))
+
+    let media = 0
+
+    if(state.comparacaoSelecionada === "IED")
+      media = calcularMediaGrupo("IED", p.IED, indice)
+
+    if(state.comparacaoSelecionada === "REGIAO")
+      media = calcularMediaGrupo("SIGLA_RG", p.SIGLA_RG, indice)
+
+    if(state.comparacaoSelecionada === "ESTADO")
+      media = calcularMediaGrupo("UF", p.UF, indice)
+
+    if(state.comparacaoSelecionada === "PAIS")
+      media = calcularMediaGrupo("PAIS", "PAIS", indice)
+
+    valoresGrupo.push(media)
+
+  })
+
+  comparacaoChart.data.labels = state.indices.map((_, i) => [
+    `Índice ${i+1}`,
+  ])
+
+  comparacaoChart.data.datasets = [
+
+    {
+      label:"Município",
+      data: valoresMunicipio,
+      backgroundColor: "#5fa3b3", // azul claro
+      borderRadius:6
+    },
+
+    {
+      label:"Referência",
+      data: valoresGrupo,
+      backgroundColor: "#2f6f7a", // azul escuro
+      borderRadius:6
+    }
+
+  ]
+
+  comparacaoChart.update()
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  lucide.createIcons()
+
+  ativarToggleRegiao()
+  ativarDropdownIndice()
+  carregarDados()
+  initComparacaoChart()
+  ativarCliqueMunicipio()
+  ativarToggleComparacao()
+
+  const buscaInput = document.getElementById("municipios-busca")
+
+  if (buscaInput) {
+    buscaInput.addEventListener("input", () => {
+
+      const listEl = document.querySelector("#municipios-list")
+
+      if (listEl) {
+        listEl.innerHTML = renderMunicipiosList()
+      }
+
+    })
+  }
+
 })

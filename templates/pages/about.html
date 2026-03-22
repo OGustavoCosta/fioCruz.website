@@ -5,8 +5,111 @@
 {% block content %}
 <div class="aboutPage__background w-full px-mobile-padding sm:px-desktop-padding py-6">
   <header class="header header--aboutPage mx-auto max-w-width-size flex flex-col gap-4">
-    <h1 class="header__title header__title--aboutPage text-4xl font-semibold text-dark-cyan max-w-200">Sobre o Observatório</h1>
-    <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Conheça a iniciativa da Fiocruz para monitorar e divulgar dados e indicadores de saúde pública de forma transparente e acessível à sociedade.</p>
+    <div class="max-w-3xl ml-0 text-neutral-600 leading-relaxed space-y-6">
+      <h1 class="header__title header__title--aboutPage text-4xl font-semibold text-dark-cyan max-w-200">Sobre o Observatório</h1>
+      <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Conheça a iniciativa da Fiocruz para monitorar e divulgar dados e indicadores de saúde pública de forma transparente e acessível à sociedade.</p>
+    </div>
+
+    <div id="metodologia" class="max-w-3xl ml-0 text-neutral-600 leading-relaxed space-y-6">
+
+      <p>
+        O índice consolida indicadores distribuídos em sete eixos temáticos, calculados com dados públicos para o período de 2018 a 2022.
+        Os indicadores selecionados seguiram uma ordem de critério.
+      </p>
+
+      <p>
+        Inicialmente, os indicadores foram eleitos se fizessem parte dos indicadores oficiais da Agenda 2030 ou se servissem como proxies
+        para indicadores dos ODS, permitindo comparabilidade global.
+      </p>
+
+      <p>
+        Segundo, foram considerados apenas indicadores disponíveis e confiáveis que pudessem ser agregados no nível municipal.
+        Terceiro, foram avaliadas a qualidade dos dados e a consistência dos indicadores ao longo dos anos.
+      </p>
+
+      <p>
+        Quarto, os indicadores foram analisados de acordo com sua relevância epidemiológica para intervenções de políticas públicas.
+        Assim, foram eleitos 22 indicadores distribuídos nos seguintes eixos temáticos:
+      </p>
+
+      <!-- Eixo -->
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-dark-cyan">Saúde reprodutiva e materna</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Razão de mortalidade materna (por 100 mil nascidos vivos)</li>
+          <li>Nascimentos em estabelecimentos de saúde (%)</li>
+          <li>Taxa de natalidade na adolescência (10 a 19 anos) (por 1.000 mulheres)</li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-dark-cyan">Saúde neonatal e da criança</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Prevalência de atraso no crescimento (%)</li>
+          <li>Prevalência de desnutrição (%)</li>
+          <li>Taxa de mortalidade de menores de 5 anos (por 1.000 nascidos vivos)</li>
+          <li>População-alvo coberta por BCG (%)</li>
+          <li>População-alvo coberta por Pentavalente (%)</li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-dark-cyan">Doenças infecciosas</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Incidência de AIDS (por 1.000 hab.)</li>
+          <li>Incidência de Tuberculose (por 1.000 hab.)</li>
+          <li>Incidência de Hepatites Virais (por 100 mil hab.)</li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-dark-cyan">Doenças crônicas não transmissíveis</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Taxa de mortalidade precoce por doenças crônicas (por 100 mil hab.)</li>
+          <li>Taxa de mortalidade por suicídio (por 100 mil hab.)</li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-dark-cyan">Lesões e violências</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Pessoas diretamente afetadas por desastres (por 100 mil hab.)</li>
+          <li>Taxa de mortalidade por acidentes de trânsito (por 100 mil hab.)</li>
+          <li>Violência contra mulheres (por 10 mil mulheres)</li>
+          <li>Pessoas vítimas de violência sexual (por 10 mil hab.)</li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-dark-cyan">Riscos ambientais</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Taxa de mortalidade por saneamento inseguro (por 100 mil hab.)</li>
+          <li>Escolas com acesso à água para consumo humano (%)</li>
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold text-dark-cyan">Cobertura universal de saúde e sistemas de saúde</h3>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Cobertura da Atenção Básica (%)</li>
+          <li>Número de médicos e enfermeiros (por 1.000 hab.)</li>
+          <li>Subnotificação dos registros de nascidos vivos (%)</li>
+        </ul>
+      </div>
+
+      <div class="pt-4 border-t">
+        <p>
+          Para mais informações sobre a metodologia de cálculo do IMDSS, recomendamos acessar o artigo metodológico:
+        </p>
+
+        <a href="https://link.springer.com/article/10.1186/s12939-025-02737-3"
+           target="_blank"
+           class="inline-block mt-2 text-teal font-semibold hover:underline">
+          Acessar artigo metodológico →
+        </a>
+      </div>
+
+    </div>
   </header>
 </div>
 {% endblock %}
