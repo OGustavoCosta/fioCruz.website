@@ -447,12 +447,12 @@ function ativarToggleRegiao() {
     btn.addEventListener("click", function () {
 
       botoes.forEach(b => {
-        b.classList.remove("bg-white","text-teal","shadow-[0_2px_8px_rgba(0,0,0,0.2)]")
-        b.classList.add("bg-transparent","text-white")
+        b.classList.remove("bg-white","text-teal","shadow-[0_2px_8px_rgba(0,0,0,0.2)]","pointer-events-none")
+        b.classList.add("bg-transparent","text-white","hover:bg-white/15")
       })
 
-      this.classList.remove("bg-transparent","text-white")
-      this.classList.add("bg-white","text-teal","shadow-[0_2px_8px_rgba(0,0,0,0.2)]")
+      this.classList.remove("bg-transparent","text-white","hover:bg-white/15")
+      this.classList.add("bg-white","text-teal","shadow-[0_2px_8px_rgba(0,0,0,0.2)]","pointer-events-none")
 
       state.regiaoSelecionada = this.dataset.regiao
 
@@ -470,7 +470,7 @@ function renderDropdownOptions() {
     <button
       type="button"
       data-indice="${i}"
-      class="w-full text-left px-4 py-3 text-sm transition-colors ${
+      class="dataDashboardPage__itemDropdown w-full text-left px-2 py-4 sm:px-4 sm:py-3 text-sm transition-colors ${
         state.indiceSelecionado === i
           ? "bg-teal-light text-teal font-semibold"
           : "text-neutral-500 hover:bg-neutral-50"
@@ -605,6 +605,7 @@ function initComparacaoChart() {
     options: {
 
       responsive: true,
+      maintainAspectRatio: false,
 
       plugins: {
 
@@ -694,12 +695,12 @@ function ativarToggleComparacao(){
     btn.addEventListener("click", function(){
 
       botoes.forEach(b=>{
-        b.classList.remove("bg-white","text-teal")
-        b.classList.add("bg-transparent","text-white")
+        b.classList.remove("bg-white","text-teal","pointer-events-none")
+        b.classList.add("bg-transparent","text-white","hover:bg-white/15")
       })
 
-      this.classList.remove("bg-transparent","text-white")
-      this.classList.add("bg-white","text-teal")
+      this.classList.remove("bg-transparent","text-white","hover:bg-white/15")
+      this.classList.add("bg-white","text-teal","pointer-events-none")
 
       state.comparacaoSelecionada = this.dataset.comparacao
 

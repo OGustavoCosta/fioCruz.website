@@ -54,7 +54,8 @@
       <img src="{{ url_for('static', filename='images/header/logo-govbr.png') }}" alt="" class="header__logoImg" />
     </div>-->
     <div class="header__logo header__logo--fiocruz">
-      <img src="{{ url_for('static', filename='images/header/logo-fiocruz.png') }}" alt="FioCruz" class="header__logoImg h-10" />
+      <img src="{{ url_for('static', filename='images/header/logo-fiocruz.png') }}" alt="FioCruz" class="header__logoImg header__logoImg--desktop h-10 hidden sm:block" />
+      <img src="{{ url_for('static', filename='images/header/logo-fiocruz-mobile.png') }}" alt="FioCruz" class="header__logoImg header__logoImg--mobile h-10 block sm:hidden" />
     </div>
 
     <nav class="header__navigation hidden sm:block">
@@ -80,10 +81,10 @@
   </div>
 
   <!-- Logo FioCruz -->
-  <div class="header__logoWrapper mx-auto max-w-width-size py-6 flex justify-start">
-    <div class="header__logo header__logo--fiocruz">
-      <h1 class="header__title header__title--dataDashboardPage text-2xl sm:text-4xl font-semibold text-white max-w-200">Observatório de Sustentabilidade da Saúde</h1>
-      <p class="header__subtitle text-white text-[1.125rem] max-w-200">Dados e Evidências para contribuir com a implementação da Agenda 2030</p>
+  <div class="header__logoWrapper mx-auto max-w-width-size pt-2 pb-4 sm:py-6 flex justify-start">
+    <div class="header__logo header__logo--fiocruz flex flex-col gap-1">
+      <h1 class="header__title header__title--dataDashboardPage text-base sm:text-xl lg:text-4xl font-semibold text-white max-w-200">Observatório de Sustentabilidade da Saúde</h1>
+      <p class="header__subtitle text-white text-sm sm:text-[1.125rem] max-w-200">Dados e Evidências para contribuir com a implementação da Agenda 2030</p>
     </div>
   </div>
 
