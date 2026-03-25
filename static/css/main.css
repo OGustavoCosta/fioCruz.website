@@ -2,5 +2,8 @@
 @import "./base/typography.css";
 @import "./base/base.css";
 
+/* Componentes */
+@import "./components/header.css";
+
 /* Páginas */
 @import "./pages/dataDashboardPage.css";

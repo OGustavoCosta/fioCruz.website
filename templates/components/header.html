@@ -1,13 +1,45 @@
+<!-- Sticky Bar -->
+<div id="header__stickyBar" class="header__stickyBar">
+  <div class="header__stickyBarInner">
+
+    <!-- Logo mobile -->
+    <img src="{{ url_for('static', filename='images/header/logo-fiocruz-mobile.png') }}" alt="FioCruz" class="header__stickyBarLogo sm:hidden" />
+    <!-- Logo desktop -->
+    <img src="{{ url_for('static', filename='images/header/logo-fiocruz.png') }}" alt="FioCruz" class="header__stickyBarLogo hidden sm:block" />
+
+    <!-- Mobile: hamburguer -->
+    <button id="header__stickyMenuButton" class="header__stickyMenuButton sm:hidden" aria-label="Abrir menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+
+    <!-- Desktop: links de navegação -->
+    <nav class="header__stickyBarNav hidden sm:block">
+      <ul class="header__stickyBarNavList flex gap-6">
+        <li><a href="{{ url_for('data_dashboard') }}" class="header__stickyBarNavLink text-white hover:underline text-sm shrink-0">Painel de dados</a></li>
+        <li><a href="{{ url_for('indicators_dashboard') }}" class="header__stickyBarNavLink text-white hover:underline text-sm shrink-0">Painel de indicadores</a></li>
+        <li><a href="{{ url_for('library') }}" class="header__stickyBarNavLink text-white hover:underline text-sm shrink-0">Biblioteca de documentos</a></li>
+        <li><a href="{{ url_for('publications') }}" class="header__stickyBarNavLink text-white hover:underline text-sm shrink-0">Produções bibliográficas</a></li>
+        <li><a href="{{ url_for('about') }}" class="header__stickyBarNavLink text-white hover:underline text-sm shrink-0">Sobre</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</div>
+
 <!-- Overlay -->
 <div
   id="header__overlay"
-  class="header__overlay fixed inset-0 bg-black/50 z-1000 transition-opacity duration-300 sm:hidden opacity-0 pointer-events-none"
+  class="header__overlay fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300 sm:hidden opacity-0 pointer-events-none"
 ></div>
 
 <!-- Drawer -->
 <aside
   id="header__drawer"
-  class="header__drawer fixed top-0 left-0 h-full w-72 bg-dark-cyan text-white z-1001 flex flex-col transition-transform duration-300 sm:hidden -translate-x-full"
+  class="header__drawer fixed top-0 left-0 h-full w-72 bg-dark-cyan text-white z-[9999] flex flex-col transition-transform duration-300 sm:hidden -translate-x-full"
 >
   <div class="header__drawerHeader flex items-center justify-between px-4 py-4 border-b border-white/20">
     <div class="header__logo header__logo--fiocruz">
@@ -98,5 +130,5 @@
       <li class="header__item"><a href="{{ url_for('about') }}" class="header__link text-white hover:underline shrink-0">Sobre</a></li>
     </ul>
   </nav>
-
+<SPAN></SPAN>
 </header>

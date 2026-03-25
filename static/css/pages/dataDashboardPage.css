@@ -38,9 +38,15 @@
 }
 
 .dataDashboardPage__mapTitle {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-neutral-500);
+}
+
+@media (min-width: 640px) {
+  .dataDashboardPage__mapTitle {
+    font-size: 1.25rem;
+  }
 }
 
 .dataDashboardPage__mapIcon {
@@ -125,10 +131,16 @@
 }
 
 .dataDashboardPage__comparativoTitle {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-neutral-500);
   margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .dataDashboardPage__comparativoTitle {
+    font-size: 1.25rem;
+  }
 }
 
 .dataDashboardPage__comparativoSubtitle {
@@ -168,15 +180,20 @@
 }
 
 
+.dataDashboardPage__municipiosBusca {
+  position: relative;
+}
+
 .dataDashboardPage__municipiosBuscaInput {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem 0.75rem 2rem;
   border: 2px solid var(--color-neutral-200);
   border-radius: 0.5rem;
   font-size: 0.875rem;
   color: var(--color-neutral-500);
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
+  position: relative;
 }
 
 .dataDashboardPage__municipiosBuscaInput:focus {

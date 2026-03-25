@@ -1,0 +1,59 @@
+/* ========================================
+   Sticky Bar
+   ======================================== */
+
+.header__stickyBar {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-100% - 1rem));
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: calc(100% - 2 * (var(--mobile-padding) * 0.75));
+  max-width: var(--width-size);
+
+  background-color: var(--color-dark-cyan);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+
+  z-index: 9997;
+}
+
+.header__stickyBar.is-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (min-width: 640px) {
+  .header__stickyBar {
+    top: 1rem;
+    width: calc(100% - 2 * (var(--desktop-padding) * 0.75));
+  }
+}
+
+.header__stickyBarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .header__stickyBarInner{
+    padding-bottom: 0.75rem;
+  }
+}
+
+.header__stickyBarLogo {
+  height: 2rem;
+  display: block;
+}
+
+.header__stickyMenuButton {
+  color: #fff;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

@@ -200,7 +200,45 @@
             />
             <i data-lucide="search" class="dataDashboardPage__municipiosBuscaIcon" width="16" height="16"></i>
           </div>
-          <ul id="municipios-list" class="dataDashboardPage__municipiosList"></ul>
+          <ul id="municipios-list" class="dataDashboardPage__municipiosList">
+            {% for _ in range(3) %}
+            <!-- ISSO aqui é um efeito de carregando -->
+            <li class="animate-pulse p-4 rounded-xl border-l-4 border-neutral-200 bg-neutral-50" style="height:198px">
+              <!-- Nome + UF -->
+              <div class="flex items-center gap-2 mb-3">
+                <div class="h-4 bg-neutral-200 rounded w-2/3"></div>
+                <div class="h-5 bg-neutral-200 rounded w-8"></div>
+              </div>
+              <!-- Índice -->
+              <div class="flex items-end gap-2 mb-4">
+                <div class="h-8 bg-neutral-200 rounded w-16"></div>
+                <div class="h-3 bg-neutral-150 rounded w-24 mb-1"></div>
+              </div>
+              <!-- Divisor -->
+              <div class="border-t border-neutral-150 pt-3">
+                <!-- Grid de dados -->
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <div class="h-3 bg-neutral-150 rounded w-16 mb-1"></div>
+                    <div class="h-4 bg-neutral-200 rounded w-20"></div>
+                  </div>
+                  <div>
+                    <div class="h-3 bg-neutral-150 rounded w-16 mb-1"></div>
+                    <div class="h-4 bg-neutral-200 rounded w-20"></div>
+                  </div>
+                  <div class="mt-1">
+                    <div class="h-3 bg-neutral-150 rounded w-16 mb-1"></div>
+                    <div class="h-4 bg-neutral-200 rounded w-20"></div>
+                  </div>
+                  <div class="mt-1">
+                    <div class="h-3 bg-neutral-150 rounded w-16 mb-1"></div>
+                    <div class="h-4 bg-neutral-200 rounded w-20"></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
           <button
             id="municipios-ver-mais"
             class="hidden w-full mt-2 py-2.5 rounded-xl text-sm font-semibold text-teal border-2 border-teal hover:bg-teal-light transition-all cursor-pointer"
@@ -211,10 +249,10 @@
 
         <!-- Gráfico -->
 
-        <div id="chart-panel" class="dataDashboardPage__chartPanel max-w-width-size bg-gradient-to-br from-teal to-teal-dark rounded-2xl px-3 py-4 sm:p-6 shadow-[0_4px_16px_rgba(0,121,107,0.15)]">
+        <div id="chart-panel" class="dataDashboardPage__chartPanel max-w-width-size bg-gradient-to-br from-teal to-teal-dark rounded-2xl px-3 py-4 sm:p-6 shadow-[0_4px_16px_rgba(0,121,107,0.15)] flex flex-col-reverse sm:flex-col gap-4">
           <!-- Chart -->
-          <div class="dataDashboardPage__chartBox bg-white rounded-xl px-3 py-4 sm:p-4 mb-4 grow">
-            <canvas id="comparacao-chart" class="dataDashboardPage__chart min-h-[240px] h-full w-full"></canvas>
+          <div class="dataDashboardPage__chartBox bg-white rounded-xl px-3 py-4 sm:p-4 grow">
+            <canvas id="comparacao-chart" class="dataDashboardPage__chart min-h-[480px] sm:min-h-[240px] h-full w-full"></canvas>
           </div>
 
           <!-- IED Toggle -->

@@ -364,8 +364,8 @@ function renderMunicipiosList() {
             <span class="dataDashboardPage__municipiosUf inline-block bg-teal text-white text-[11px] font-bold px-2 py-0.5 rounded ml-2">${uf}</span>
           </div>
 
-          <div class="dataDashboardPage__municipiosIndiceRow flex items-baseline gap-2">
-            <span class="dataDashboardPage__municipiosIndice text-[1.75rem] font-bold text-teal">${indice.toFixed(2)}</span>
+          <div class="dataDashboardPage__municipiosIndiceRow flex items-center gap-2 sm:gap-4">
+            <span class="dataDashboardPage__municipiosIndice text-xl sm:text-[1.75rem] font-bold text-teal">${indice.toFixed(2)}</span>
             <span class="dataDashboardPage__municipiosIndiceLabel text-xs text-neutral-400 font-medium">${state.indices[state.indiceSelecionado].label}</span>
           </div>
 
@@ -580,11 +580,39 @@ function carregarDados() {
 
 let comparacaoChart = null
 
+function isMobile() {
+  return window.innerWidth < 640
+}
+
 function initComparacaoChart() {
 
   const ctx = document.getElementById("comparacao-chart")
 
   if (!ctx) return
+
+  const mobile = isMobile()
+
+  const scalesConfig = mobile
+    ? {
+        x: {
+          beginAtZero: true,
+          max: 1,
+          ticks: { stepSize: 0.2 }
+        },
+        y: {
+          grid: { display: false }
+        }
+      }
+    : {
+        y: {
+          beginAtZero: true,
+          max: 1,
+          ticks: { stepSize: 0.2 }
+        },
+        x: {
+          grid: { display: false }
+        }
+      }
 
   comparacaoChart = new Chart(ctx, {
 
@@ -603,6 +631,8 @@ function initComparacaoChart() {
     },
 
     options: {
+
+      indexAxis: mobile ? "y" : "x",
 
       responsive: true,
       maintainAspectRatio: false,
@@ -662,28 +692,21 @@ function initComparacaoChart() {
 
       },
 
-      scales: {
-
-        y: {
-          beginAtZero: true,
-          max: 1,
-          ticks: {
-            stepSize: 0.2
-          }
-        },
-
-        x: {
-          grid: {
-            display: false
-          }
-        }
-
-      }
+      scales: scalesConfig
 
     }
 
   })
 
+}
+
+function recriarChart() {
+  if (comparacaoChart) {
+    comparacaoChart.destroy()
+    comparacaoChart = null
+  }
+  initComparacaoChart()
+  atualizarGraficoComparacao()
 }
 
 function ativarToggleComparacao(){
@@ -855,5 +878,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   }
+
+  window.matchMedia('(max-width: 639px)').addEventListener('change', recriarChart)
 
 })
