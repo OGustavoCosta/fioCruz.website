@@ -12,7 +12,7 @@
 <!-- Título da página -->
 <div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding py-8">
   <header class="header header--dataDashboardPage mx-auto max-w-width-size flex flex-col gap-3">
-    <h1 class="header__title header__title--dataDashboardPage text-2xl font-semibold text-dark-cyan max-w-200">Índice Municipal de Desenvolvimento Sustentável em Saúde (IMDSS)</h1>
+    <h1 class="header__title header__title--dataDashboardPage sm:text-2xl font-semibold text-dark-cyan max-w-200">Índice Municipal de Desenvolvimento Sustentável em Saúde (IMDSS)</h1>
     <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Mede o desenvolvimento sustentável em saúde relativo dos municípios com base em dados administrativos
 nacionais, publicamente disponíveis, de 2018 a 2022.</p>
   </header>
@@ -58,7 +58,7 @@ nacionais, publicamente disponíveis, de 2018 a 2022.</p>
 
 <!-- Filtros -->
 <div class="dataDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
-  <section class="filters">
+  <section class="filters max-w-[100vw]">
     <div class="dataDashboardPage__filtersContent mx-auto max-w-width-size bg-gradient-to-br from-teal to-teal-dark rounded-2xl p-6 shadow-[0_4px_16px_rgba(0,121,107,0.15)]">
       <h2 class="dataDashboardPage__filtersTitle text-xl font-semibold text-white mb-5 flex items-center gap-2">
         <i data-lucide="sliders-horizontal" class="dataDashboardPage__filtersTitleIcon shrink-0" width="20" height="20"></i>
@@ -72,12 +72,12 @@ nacionais, publicamente disponíveis, de 2018 a 2022.</p>
             Selecione
           </span>
           <div id="modo-toggle" class="dataDashboardPage__iedButtons grid grid-cols-2 sm:grid-cols-6 gap-3 bg-black/20 p-1 rounded-xl">
-            <button type="button" data-regiao="Brasil" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-white text-teal shadow-[0_2px_8px_rgba(0,0,0,0.2)]">Brasil</button>
-            <button type="button" data-regiao="N" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Norte</button>
-            <button type="button" data-regiao="NE" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Nordeste</button>
-            <button type="button" data-regiao="CO" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Centro-Oeste</button>
-            <button type="button" data-regiao="SE" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Sudeste</button>
-            <button type="button" data-regiao="S" class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Sul</button>
+            <button type="button" data-regiao="Brasil" class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-white text-teal shadow-[0_2px_8px_rgba(0,0,0,0.2)]">Brasil</button>
+            <button type="button" data-regiao="N" class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Norte</button>
+            <button type="button" data-regiao="NE" class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Nordeste</button>
+            <button type="button" data-regiao="CO" class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Centro-Oeste</button>
+            <button type="button" data-regiao="SE" class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Sudeste</button>
+            <button type="button" data-regiao="S" class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">Região Sul</button>
           </div>
         </div>
 
@@ -202,6 +202,12 @@ nacionais, publicamente disponíveis, de 2018 a 2022.</p>
             <i data-lucide="search" class="dataDashboardPage__municipiosBuscaIcon" width="16" height="16"></i>
           </div>
           <ul id="municipios-list" class="dataDashboardPage__municipiosList"></ul>
+          <button
+            id="municipios-ver-mais"
+            class="hidden w-full mt-2 py-2.5 rounded-xl text-sm font-semibold text-teal border-2 border-teal hover:bg-teal-light transition-all cursor-pointer"
+          >
+            Ver mais municípios
+          </button>
         </div>
 
         <!-- Gráfico -->
@@ -221,22 +227,22 @@ nacionais, publicamente disponíveis, de 2018 a 2022.</p>
             <div id="modo-toggle-comparacao" class="dataDashboardPage__iedButtons grid grid-cols-2 sm:grid-cols-4 gap-3 bg-black/20 p-1 rounded-xl">
 
               <button type="button" data-comparacao="IED"
-                class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-white text-teal shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-white text-teal shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
                 Média IED
               </button>
 
               <button type="button" data-comparacao="REGIAO"
-                class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">
+                class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">
                 Média Região
               </button>
 
               <button type="button" data-comparacao="ESTADO"
-                class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">
+                class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">
                 Média Estado
               </button>
 
               <button type="button" data-comparacao="PAIS"
-                class="dataDashboardPage__iedButton w-full py-3 px-4 rounded-lg text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">
+                class="dataDashboardPage__iedButton w-full py-2 px-2 sm:py-3 sm:px-4 rounded-lg text-xs sm:text-[0.9375rem] font-semibold transition-all duration-300 cursor-pointer bg-transparent text-white hover:bg-white/15">
                 Média País
               </button>
 

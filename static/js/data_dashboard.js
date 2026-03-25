@@ -4,6 +4,8 @@
 let leafletMapInstance = null
 let geojsonLayer = null
 
+const ITENS_POR_PAGINA = 20
+
 let state = {
   municipioSelecionado: null,
   comparacaoSelecionada: "IED",
@@ -12,6 +14,7 @@ let state = {
   indiceSelecionado: 0,
   dropdownOpen: false,
   indiceComparacao: "Ind_mun",
+  paginaMunicipios: 1,
 
   indices: [
     { value: "Ind_mun", label: "Índice Municipal de Desenvolvimento Sustentável em Saúde (IMDSS)" },
@@ -312,17 +315,32 @@ function getMunicipiosFiltrados() {
 
 }
 
+function atualizarBotaoVerMais(total, limite) {
+  const btn = document.getElementById('municipios-ver-mais')
+  if (!btn) return
+  if (limite >= total) {
+    btn.classList.add('hidden')
+  } else {
+    btn.classList.remove('hidden')
+  }
+}
+
 function renderMunicipiosList() {
 
   const filtrados = getMunicipiosFiltrados()
 
   if (filtrados.length === 0) {
+    atualizarBotaoVerMais(0, 0)
     return '<li class="dataDashboardPage__municipiosEmpty text-sm text-neutral-400 py-4 text-center">Nenhum município encontrado.</li>'
   }
 
   const indiceKey = state.indiceComparacao || "Ind_mun"
+  const limite = state.paginaMunicipios * ITENS_POR_PAGINA
+  const visiveis = filtrados.slice(0, limite)
 
-  return filtrados.map(m => {
+  atualizarBotaoVerMais(filtrados.length, limite)
+
+  return visiveis.map(m => {
 
     const p = m.properties
 
@@ -413,6 +431,9 @@ function initMap() {
   leafletMapInstance.fitBounds(geojsonLayer.getBounds())
 
   atualizarCoresMapa()
+
+  const loadingEl = document.getElementById('map-loading')
+  if (loadingEl) loadingEl.classList.add('hidden')
 }
 
 // -----------------------------
@@ -526,7 +547,7 @@ function carregarDados() {
 
       state.municipios = data.features.map(f => f.properties)
 
-      initMap()
+      setTimeout(() => initMap(), 0)
 
       const listEl = document.querySelector("#municipios-list")
       if (listEl) {
@@ -815,13 +836,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (buscaInput) {
     buscaInput.addEventListener("input", () => {
-
+      state.paginaMunicipios = 1
       const listEl = document.querySelector("#municipios-list")
-
       if (listEl) {
         listEl.innerHTML = renderMunicipiosList()
       }
+    })
+  }
 
+  const verMaisBtn = document.getElementById('municipios-ver-mais')
+  if (verMaisBtn) {
+    verMaisBtn.addEventListener('click', () => {
+      state.paginaMunicipios++
+      const listEl = document.querySelector('#municipios-list')
+      if (listEl) {
+        listEl.innerHTML = renderMunicipiosList()
+      }
     })
   }
 

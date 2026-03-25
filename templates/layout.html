@@ -60,7 +60,7 @@
 <body class="mainLayout grid grid-rows-[auto_1fr_auto] w-full min-h-dvh">
   {% include 'components/header.html' %}
 
-  <main id="main" class="mainLayout__main w-full bg-neutral-50">
+  <main id="main" class="mainLayout__main w-full bg-neutral-50 flex flex-col">
     {% block content %}{% endblock %}
   </main>
 
@@ -73,8 +73,10 @@
       <div class="vw-plugin-top-wrapper"></div>
     </div>
   </div>
+
   <!-- Inicializa ícones Lucide -->
   <script>lucide.createIcons()</script>
+  <script src="{{ url_for('static', filename='js/header.js') }}"></script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
   <script>

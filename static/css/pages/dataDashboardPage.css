@@ -9,8 +9,14 @@
   max-width: var(--width-size);
   background-color: #fff;
   border-radius: 0.75rem;
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 640px) {
+  .dataDashboardPage__mapContent {
+    padding: 1.5rem;
+  }
 }
 
 .leaflet-container {
@@ -100,8 +106,14 @@
   max-width: var(--width-size);
   background-color: #fff;
   border-radius: 0.75rem;
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 640px) {
+  .dataDashboardPage__comparativoContent {
+    padding: 1.5rem;
+  }
 }
 
 .dataDashboardPage__comparativoHeader {
@@ -130,6 +142,10 @@
   grid-template-columns: 1fr;
   gap: 2rem;
   align-items: stretch;
+}
+
+.dataDashboardPage__comparativoGrid > * {
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {

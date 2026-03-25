@@ -6,7 +6,7 @@
     --font-rawline: 'Rawline', sans-serif;
 
     /* padrões de página */
-    --mobile-padding: 1rem;
+    --mobile-padding: 0.75rem;
     --desktop-padding: 2rem;
     --width-size: 1280px;
 
@@ -61,9 +61,15 @@
     box-sizing: border-box;
 }
 
+img {
+    max-width: 100%;
+    display: block;
+}
+
 body{
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 
     font-family: 'Rawline', sans-serif;
 }
