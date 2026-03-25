@@ -718,12 +718,12 @@ function ativarToggleComparacao(){
     btn.addEventListener("click", function(){
 
       botoes.forEach(b=>{
-        b.classList.remove("bg-white","text-teal","pointer-events-none")
+        b.classList.remove("bg-white","text-teal","pointer-events-none","shadow-[0_2px_8px_rgba(0,0,0,0.2)]")
         b.classList.add("bg-transparent","text-white","hover:bg-white/15")
       })
 
       this.classList.remove("bg-transparent","text-white","hover:bg-white/15")
-      this.classList.add("bg-white","text-teal","pointer-events-none")
+      this.classList.add("bg-white","text-teal","pointer-events-none","shadow-[0_2px_8px_rgba(0,0,0,0.2)]")
 
       state.comparacaoSelecionada = this.dataset.comparacao
 
