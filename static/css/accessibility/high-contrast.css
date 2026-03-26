@@ -1,0 +1,387 @@
+/* ============================================================
+   Alto Contraste — eMAG + WCAG AAA (7:1)
+   Fundo: #000000 | Texto: #ffffff | Links/Destaque: #fff333
+   ============================================================ */
+
+
+/* ----------------------------------------
+   Botão de ativação
+   ---------------------------------------- */
+
+.highContrast__btn {
+  position: fixed;
+  right: 0;
+  top: calc(50% + 40px);
+  z-index: 9996;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  padding: 10px 8px;
+  cursor: pointer;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+
+  transition: background-color 0.2s;
+}
+
+.highContrast__btn:hover {
+  background-color: #333333;
+}
+
+.highContrast__btn.is-active {
+  background-color: #fff333;
+  color: #000000;
+}
+
+
+/* ============================================================
+   Overrides aplicados quando html.high-contrast está ativo
+   ============================================================ */
+
+/* Variáveis CSS */
+html.high-contrast {
+  --color-teal:         #fff333;
+  --color-teal-dark:    #fff333;
+  --color-teal-light:   #1a1a1a;
+  --color-dark-cyan:    #000000;
+  --color-cyan:         #fff333;
+  --color-neutral-500:  #ffffff;
+  --color-neutral-400:  #ffffff;
+  --color-neutral-300:  #cccccc;
+  --color-neutral-200:  #ffffff;
+  --color-neutral-175:  #555555;
+  --color-neutral-150:  #333333;
+  --color-neutral-100:  #1a1a1a;
+  --color-neutral-50:   #111111;
+  --color-neutral-0:    #000000;
+}
+
+/* Fundo geral */
+html.high-contrast,
+html.high-contrast body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast main {
+  background-color: #000000 !important;
+}
+
+
+/* ----------------------------------------
+   Fundos Tailwind → preto
+   ---------------------------------------- */
+
+html.high-contrast .bg-white,
+html.high-contrast .bg-neutral-50,
+html.high-contrast .bg-neutral-100,
+html.high-contrast .bg-neutral-150 {
+  background-color: #000000 !important;
+}
+
+html.high-contrast .bg-dark-cyan {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #ffffff;
+}
+
+html.high-contrast .bg-teal,
+html.high-contrast .bg-teal-dark,
+html.high-contrast .bg-teal-light {
+  background-color: #000000 !important;
+}
+
+/* Gradientes Tailwind → remover */
+html.high-contrast .dataDashboardPage__filtersContent,
+html.high-contrast #chart-panel,
+html.high-contrast .dataDashboardPage__infoBox {
+  background: #000000 !important;
+  background-image: none !important;
+}
+
+html.high-contrast #chart-panel,
+html.high-contrast .dataDashboardPage__infoBox {
+  border: 1px solid #ffffff;
+}
+
+/* Fundos hardcoded no CSS customizado */
+html.high-contrast .dataDashboardPage__mapContent,
+html.high-contrast .dataDashboardPage__comparativoContent {
+  background-color: #000000 !important;
+  box-shadow: none !important;
+  border: 1px solid #333333;
+}
+
+/* Leaflet */
+html.high-contrast .leaflet-container {
+  background: #000000 !important;
+}
+
+html.high-contrast .leaflet-tooltip {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Seção IED (bg-white/10) */
+html.high-contrast .dataDashboardPage__iedSection {
+  background-color: #111111 !important;
+  border: 1px solid #555555;
+}
+
+/* Toggle IED (bg-black/20) */
+html.high-contrast .dataDashboardPage__iedButtons {
+  background-color: #111111 !important;
+}
+
+
+/* ----------------------------------------
+   Texto
+   ---------------------------------------- */
+
+html.high-contrast .text-neutral-500,
+html.high-contrast .text-neutral-400,
+html.high-contrast .text-neutral-300 {
+  color: #ffffff !important;
+}
+
+html.high-contrast .text-teal,
+html.high-contrast .text-teal-dark,
+html.high-contrast .text-dark-cyan {
+  color: #fff333 !important;
+}
+
+html.high-contrast .text-white {
+  color: #ffffff !important;
+}
+
+/* Texto hardcoded no CSS customizado */
+html.high-contrast .dataDashboardPage__legendaTicks {
+  color: #ffffff !important;
+}
+
+
+/* ----------------------------------------
+   Links → amarelo + sublinhado (eMAG)
+   ---------------------------------------- */
+
+html.high-contrast a {
+  color: #fff333 !important;
+  text-decoration: underline !important;
+}
+
+html.high-contrast button {
+  text-decoration: none !important;
+}
+
+
+/* ----------------------------------------
+   Bordas
+   ---------------------------------------- */
+
+html.high-contrast .border-teal,
+html.high-contrast .border-teal-light,
+html.high-contrast .border-teal-dark {
+  border-color: #ffffff !important;
+}
+
+html.high-contrast .border-neutral-200,
+html.high-contrast .border-neutral-150 {
+  border-color: #555555 !important;
+}
+
+html.high-contrast .dataDashboardPage__municipiosCard {
+  background: #000000 !important;
+  background-image: none !important;
+  border-top-color: #333333 !important;
+  border-right-color: #333333 !important;
+  border-bottom-color: #333333 !important;
+  border-left-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html.high-contrast .dataDashboardPage__municipiosDados {
+  border-top-color: #333333 !important;
+}
+
+html.high-contrast .dataDashboardPage__mapHeader,
+html.high-contrast .dataDashboardPage__comparativoHeader {
+  border-bottom-color: #333333 !important;
+}
+
+
+/* ----------------------------------------
+   Dropdown (select customizado)
+   ---------------------------------------- */
+
+/* Trigger: usa bg-white/95 (classe com opacidade) */
+html.high-contrast .dataDashboardPage__selectTrigger {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast .dataDashboardPage__selectValue {
+  color: #ffffff !important;
+}
+
+/* Lista de opções */
+html.high-contrast #indice-select-dropdown {
+  background-color: #000000 !important;
+  border-color: #555555 !important;
+  box-shadow: none !important;
+}
+
+html.high-contrast #indice-select-dropdown li {
+  color: #ffffff !important;
+  border-color: #333333 !important;
+}
+
+html.high-contrast #indice-select-dropdown li:hover,
+html.high-contrast #indice-select-dropdown li[aria-selected="true"] {
+  background-color: #fff333 !important;
+  color: #000000 !important;
+}
+
+
+/* ----------------------------------------
+   Botões IED / Toggle
+   ---------------------------------------- */
+
+html.high-contrast .dataDashboardPage__iedButton.bg-white {
+  background-color: #fff333 !important;
+  color: #000000 !important;
+  box-shadow: none !important;
+}
+
+html.high-contrast .dataDashboardPage__iedButton.bg-transparent {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+
+/* ----------------------------------------
+   Botões de download
+   ---------------------------------------- */
+
+html.high-contrast .dataDashboardPage__downloadBtn {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+
+/* ----------------------------------------
+   Inputs
+   ---------------------------------------- */
+
+html.high-contrast input {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+html.high-contrast input::placeholder {
+  color: #aaaaaa !important;
+}
+
+html.high-contrast .dataDashboardPage__municipiosBuscaInput:focus {
+  box-shadow: 0 0 0 3px #fff333 !important;
+  border-color: #fff333 !important;
+}
+
+
+/* ----------------------------------------
+   Badge UF
+   ---------------------------------------- */
+
+html.high-contrast .dataDashboardPage__municipiosUf {
+  background-color: #fff333 !important;
+  color: #000000 !important;
+}
+
+
+/* ----------------------------------------
+   Legenda do mapa
+   ---------------------------------------- */
+
+html.high-contrast .dataDashboardPage__mapLegenda {
+  background: #000000 !important;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+
+/* ----------------------------------------
+   Scrollbar
+   ---------------------------------------- */
+
+html.high-contrast .dataDashboardPage__municipiosList::-webkit-scrollbar-track {
+  background-color: #111111;
+}
+
+html.high-contrast .dataDashboardPage__municipiosList::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+}
+
+
+/* ----------------------------------------
+   Footer
+   ---------------------------------------- */
+
+html.high-contrast footer {
+  background-color: #000000 !important;
+  border-top: 1px solid #333333;
+}
+
+html.high-contrast .footer__copyright {
+  border-top-color: #333333 !important;
+}
+
+html.high-contrast .footer__text,
+html.high-contrast .text-neutral-100 {
+  color: #ffffff !important;
+}
+
+html.high-contrast .footer__link {
+  color: #fff333 !important;
+  text-decoration: underline !important;
+}
+
+html.high-contrast .footer__link:hover {
+  background-color: #333333 !important;
+}
+
+
+/* ----------------------------------------
+   Sticky bar
+   ---------------------------------------- */
+
+html.high-contrast .header__stickyBar {
+  border: 1px solid #ffffff;
+}
+
+
+/* ----------------------------------------
+   Botão de alto contraste em modo ativo
+   ---------------------------------------- */
+
+html.high-contrast .highContrast__btn {
+  background-color: #fff333;
+  color: #000000;
+}
+
+html.high-contrast .highContrast__btn:hover {
+  background-color: #e6d400;
+}

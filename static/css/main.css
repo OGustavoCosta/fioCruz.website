@@ -5,5 +5,8 @@
 /* Componentes */
 @import "./components/header.css";
 
+/* Acessibilidade */
+@import "./accessibility/high-contrast.css";
+
 /* Páginas */
 @import "./pages/dataDashboardPage.css";

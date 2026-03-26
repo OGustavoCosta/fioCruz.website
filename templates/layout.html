@@ -66,6 +66,18 @@
 
   {% include 'components/footer.html' %}
 
+  <!-- Alto Contraste -->
+  <button
+    id="btn-alto-contraste"
+    class="highContrast__btn"
+    aria-label="Ativar alto contraste"
+    aria-pressed="false"
+    title="Alto contraste"
+  >
+    <i data-lucide="contrast" width="20" height="20"></i>
+    <span>Alto<br>Contraste</span>
+  </button>
+
   <!-- VLibras -->
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
@@ -77,6 +89,7 @@
   <!-- Inicializa ícones Lucide -->
   <script>lucide.createIcons()</script>
   <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/accessibility.js') }}"></script>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
   <script>
