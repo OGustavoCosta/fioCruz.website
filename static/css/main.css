@@ -6,6 +6,7 @@
 @import "./components/header.css";
 
 /* Acessibilidade */
+@import "./accessibility/accessibility.css";
 @import "./accessibility/high-contrast.css";
 
 /* Páginas */

@@ -1,0 +1,176 @@
+/* ============================================================
+   Acessibilidade — eMAG
+   ============================================================ */
+
+
+/* ----------------------------------------
+   Skip to content (Pular para conteúdo)
+   ---------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+
+  padding: 0.75rem 1.25rem;
+  background: #004D40;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+
+  transition: top 0.15s;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff333;
+  outline-offset: 2px;
+}
+
+
+/* ----------------------------------------
+   Ocultar widgets ao chegar no footer
+   ---------------------------------------- */
+
+.a11y-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+
+/* ----------------------------------------
+   Ajuste de tamanho de fonte (A- / A / A+)
+   ---------------------------------------- */
+
+.fontSize__group {
+  position: fixed;
+  right: 0;
+  bottom: 100px;
+  z-index: 9996;
+  transition: opacity 0.2s;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.fontSize__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: none;
+  border-top: 1px solid #333333;
+  padding: 8px 10px;
+  min-width: 36px;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1;
+
+  transition: background-color 0.2s;
+}
+
+.fontSize__btn:first-child {
+  border-top: none;
+  border-radius: 8px 0 0 0;
+}
+
+.fontSize__btn:last-child {
+  border-radius: 0 0 0 8px;
+}
+
+.fontSize__btn:hover {
+  background-color: #333333;
+}
+
+.fontSize__btn.is-active {
+  background-color: #fff333;
+  color: #000000;
+}
+
+.fontSize__btn--large  { font-size: 1.1rem; }
+.fontSize__btn--normal { font-size: 0.875rem; }
+.fontSize__btn--small  { font-size: 0.7rem; }
+
+
+/* ----------------------------------------
+   Alto contraste — overrides para elementos de acessibilidade
+   ---------------------------------------- */
+
+html.high-contrast .skip-link {
+  background: #000000;
+  border: 2px solid #ffffff;
+  color: #fff333;
+}
+
+html.high-contrast .fontSize__btn {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #333333;
+}
+
+html.high-contrast .fontSize__btn:hover {
+  background-color: #222222;
+}
+
+html.high-contrast .fontSize__btn.is-active {
+  background-color: #fff333;
+  color: #000000;
+}
+
+html.high-contrast .highContrast__btn.is-active {
+  background-color: #fff333;
+  color: #000000;
+}
+
+
+/* ----------------------------------------
+   Focus visible — navegação por teclado (eMAG / WCAG 2.4.7)
+   ---------------------------------------- */
+
+:focus-visible {
+  outline: 3px solid #00796B;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Links e botões dentro de fundos escuros (header, filtros, chart panel) */
+.bg-dark-cyan :focus-visible,
+.bg-teal :focus-visible,
+.header :focus-visible,
+.fontSize__group :focus-visible,
+.highContrast__btn:focus-visible {
+  outline-color: #ffffff;
+}
+
+/* Alto contraste: amarelo em qualquer contexto */
+html.high-contrast :focus-visible {
+  outline-color: #fff333 !important;
+  outline-width: 3px !important;
+}
+
+
+/* ----------------------------------------
+   prefers-reduced-motion — respeitar preferência do SO (eMAG / WCAG 2.3.3)
+   ---------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Skip link: sem animação de slide, aparece direto */
+  .skip-link {
+    transition: none !important;
+  }
+}

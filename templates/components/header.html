@@ -8,7 +8,7 @@
     <img src="{{ url_for('static', filename='images/header/logo-fiocruz.png') }}" alt="FioCruz" class="header__stickyBarLogo hidden sm:block" />
 
     <!-- Mobile: hamburguer -->
-    <button id="header__stickyMenuButton" class="header__stickyMenuButton sm:hidden" aria-label="Abrir menu">
+    <button id="header__stickyMenuButton" class="header__stickyMenuButton sm:hidden" aria-label="Abrir menu" aria-expanded="false" aria-controls="header__drawer">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="6" x2="21" y2="6" />
         <line x1="3" y1="12" x2="21" y2="12" />
@@ -39,6 +39,9 @@
 <!-- Drawer -->
 <aside
   id="header__drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu de navegação"
   class="header__drawer fixed top-0 left-0 h-full w-72 bg-dark-cyan text-white z-[9999] flex flex-col transition-transform duration-300 sm:hidden -translate-x-full"
 >
   <div class="header__drawerHeader flex items-center justify-between px-4 py-4 border-b border-white/20">
@@ -103,6 +106,8 @@
       id="header__menuButton"
       class="header__menuButton sm:hidden text-white p-1 cursor-pointer"
       aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="header__drawer"
     >
       <svg class="header__menuIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="6" x2="21" y2="6" />

@@ -11,7 +11,7 @@
 .highContrast__btn {
   position: fixed;
   right: 0;
-  top: calc(50% + 40px);
+  bottom: 16px;
   z-index: 9996;
 
   display: flex;
@@ -31,7 +31,7 @@
   line-height: 1.2;
   text-align: center;
 
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, opacity 0.2s;
 }
 
 .highContrast__btn:hover {
@@ -174,7 +174,8 @@ html.high-contrast .dataDashboardPage__legendaTicks {
    Links → amarelo + sublinhado (eMAG)
    ---------------------------------------- */
 
-html.high-contrast a {
+html.high-contrast a,
+html.high-contrast a[href] {
   color: #fff333 !important;
   text-decoration: underline !important;
 }

@@ -58,6 +58,10 @@
   {% block extra_css %}{% endblock %}
 </head>
 <body class="mainLayout grid grid-rows-[auto_1fr_auto] w-full min-h-dvh">
+
+  <!-- Skip to content (eMAG) -->
+  <a href="#main" class="skip-link">Pular para o conteúdo principal</a>
+
   {% include 'components/header.html' %}
 
   <main id="main" class="mainLayout__main w-full bg-neutral-50 flex flex-col">
@@ -65,6 +69,13 @@
   </main>
 
   {% include 'components/footer.html' %}
+
+  <!-- Ajuste de tamanho de fonte (eMAG) -->
+  <div class="fontSize__group" role="group" aria-label="Ajustar tamanho da fonte">
+    <button id="btn-fonte-grande"  class="fontSize__btn fontSize__btn--large"  aria-label="Aumentar fonte" aria-pressed="false">A+</button>
+    <button id="btn-fonte-normal"  class="fontSize__btn fontSize__btn--normal is-active" aria-label="Fonte normal"   aria-pressed="true">A</button>
+    <button id="btn-fonte-pequeno" class="fontSize__btn fontSize__btn--small"  aria-label="Diminuir fonte" aria-pressed="false">A-</button>
+  </div>
 
   <!-- Alto Contraste -->
   <button
