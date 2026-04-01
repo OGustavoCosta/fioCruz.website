@@ -75,7 +75,7 @@
       <li class="header__drawerExternalItem"><a href="https://www.gov.br/pt-br/orgaos-do-governo" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Órgãos do Governo</a></li>
       <li class="header__drawerExternalItem"><a href="https://www.gov.br/acessoainformacao/pt-br" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Acesso à Informação</a></li>
       <li class="header__drawerExternalItem"><a href="https://www4.planalto.gov.br/legislacao" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Legislação</a></li>
-      <li id="botao-acessibilidade" class="header__drawerExternalItem"><a href="#" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Acessibilidade</a></li>
+      <li id="botao-acessibilidade" class="header__drawerExternalItem"><a href="{{ url_for('accessibility') }}" class="header__drawerExternalLink block py-2 text-white/70 hover:text-white hover:underline text-sm" target="_blank">Acessibilidade</a></li>
     </ul>
   </nav>
 </aside>
@@ -98,7 +98,7 @@
         <li class="header__item"><a href="https://www.gov.br/pt-br/orgaos-do-governo" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Órgãos do Governo</a></li>
         <li class="header__item"><a href="https://www.gov.br/acessoainformacao/pt-br" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Acesso à Informação</a></li>
         <li class="header__item"><a href="https://www4.planalto.gov.br/legislacao" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Legislação</a></li>
-        <!--<li class="header__item"><a href="#" class="header__link text-white hover:underline text-[0.75rem]" target="_blank">Acessibilidade</a></li>-->
+        <li class="header__item"><a href="{{ url_for('accessibility') }}" class="header__link text-white hover:underline text-[0.75rem]">Acessibilidade</a></li>
       </ul>
     </nav>
 
@@ -126,7 +126,7 @@
   </div>
 
   <!-- Navegação principal (desktop) -->
-  <nav class="header__navigation header__navigation--main hidden sm:block mx-auto max-w-width-size w-full py-4">
+  <nav id="nav-principal" class="header__navigation header__navigation--main hidden sm:block mx-auto max-w-width-size w-full py-4">
     <ul class="header__list flex flex-wrap gap-6">
       <li class="header__item"><a href="{{ url_for('data_dashboard') }}" class="header__link text-white hover:underline shrink-0">Painel de dados</a></li>
       <li class="header__item"><a href="{{ url_for('indicators_dashboard') }}" class="header__link text-white hover:underline shrink-0">Painel de indicadores</a></li>

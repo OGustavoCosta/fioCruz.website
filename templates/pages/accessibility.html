@@ -1,0 +1,201 @@
+{% extends "layout.html" %}
+{% from "components/breadcrumb.html" import breadcrumb %}
+
+{% block title %}Acessibilidade{% endblock %}
+
+{% block content %}
+{{ breadcrumb("Acessibilidade") }}
+<div class="accessibilityPage__background w-full px-mobile-padding sm:px-desktop-padding py-6 pt-3">
+  <header class="header header--accessibilityPage mx-auto max-w-width-size flex flex-col gap-4">
+    <h1 class="header__title header__title--accessibilityPage text-xl sm:text-3xl font-semibold text-dark-cyan max-w-200">Acessibilidade</h1>
+    <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Este portal segue as diretrizes do <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital/modelo-de-acessibilidade" class="header__link underline" target="_blank">eMAG (Modelo de Acessibilidade em Governo Eletrônico)</a>, conforme as normas do Governo Federal, em obediência ao <a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/decreto/d5296.htm" class="header__link underline" target="_blank"> Decreto 5.296, de 2.12.2004.</a></p>
+  </header>
+</div>
+
+<!-- Guia de recursos de acessibilidade -->
+<div class="w-full px-mobile-padding sm:px-desktop-padding py-10 pt-2">
+  <div class="mx-auto max-w-width-size flex flex-col gap-10">
+
+    <!-- Introdução -->
+    <section class="flex flex-col gap-3" aria-labelledby="intro-titulo">
+      <h2 id="intro-titulo" class="text-2xl font-semibold text-dark-cyan">O que é acessibilidade digital?</h2>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        Acessibilidade significa incluir a pessoa com deficiência na participação de atividades do cotidiano — como o uso de produtos, serviços e informações. No ambiente digital, a acessibilidade refere-se principalmente às recomendações do <a href="https://www.w3.org/Translations/WCAG20-pt-PT/" class="underline hover:text-teal transition-colors" target="_blank">WCAG (Web Content Accessibility Guidelines)</a> do <a href="https://www.w3.org/" class="underline hover:text-teal transition-colors" target="_blank">W3C</a> e, para sites governamentais brasileiros, ao <a href="https://emag.governoeletronico.gov.br/" class="underline hover:text-teal transition-colors" target="_blank">eMAG</a> — padrão alinhado às recomendações internacionais, de observância obrigatória conforme a <a href="https://www.planalto.gov.br/ccivil_03/portaria/prt/portaria-n3-7-maio-2007-sisp.htm" class="underline hover:text-teal transition-colors" target="_blank">Portaria nº 3, de 7 de maio de 2007</a>.
+      </p>
+    </section>
+
+    <section aria-labelledby="guia-titulo">
+      <h2 id="guia-titulo" class="text-2xl font-semibold text-dark-cyan mb-2">Recursos de acessibilidade disponíveis</h2>
+      <p class="text-neutral-500 text-base leading-relaxed">Este portal disponibiliza os seguintes recursos para tornar a navegação mais acessível. Saiba como utilizá-los:</p>
+    </section>
+
+    <!-- Alto contraste -->
+    <section class="flex flex-col gap-3" aria-labelledby="alto-contraste-titulo">
+      <h3 id="alto-contraste-titulo" class="text-xl font-semibold text-teal-dark flex items-center gap-2">
+        <i data-lucide="contrast" width="22" height="22" aria-hidden="true"></i>
+        Alto contraste
+      </h3>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        O botão de alto contraste fica fixo no canto direito da tela. Ao ativá-lo, as cores do portal são substituídas por fundo preto, texto branco e links em amarelo — proporcionando razão de contraste mínima de 7:1 (nível AAA do WCAG).
+      </p>
+      <ul class="list-disc list-inside text-neutral-500 text-base leading-loose pl-2">
+        <li>Clique no botão <strong>Alto Contraste</strong> para ativar ou desativar.</li>
+        <li>A preferência é salva automaticamente e mantida em visitas futuras.</li>
+        <li>Caso o seu sistema operacional já esteja configurado para alto contraste, o portal ativará o modo automaticamente.</li>
+      </ul>
+    </section>
+
+    <!-- Tamanho de fonte -->
+    <section class="flex flex-col gap-3" aria-labelledby="tamanho-fonte-titulo">
+      <h3 id="tamanho-fonte-titulo" class="text-xl font-semibold text-teal-dark flex items-center gap-2">
+        <i data-lucide="type" width="22" height="22" aria-hidden="true"></i>
+        Ajuste de tamanho de fonte
+      </h3>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        Os botões <strong>A-</strong>, <strong>A</strong> e <strong>A+</strong>, fixos no canto direito da tela, permitem reduzir, restaurar ou aumentar o tamanho de todo o texto do portal.
+      </p>
+      <ul class="list-disc list-inside text-neutral-500 text-base leading-loose pl-2">
+        <li><strong>A-</strong> — texto menor (87,5% do tamanho padrão).</li>
+        <li><strong>A</strong> — tamanho padrão (100%).</li>
+        <li><strong>A+</strong> — texto maior (112,5% do tamanho padrão).</li>
+        <li>A preferência é salva automaticamente e mantida em visitas futuras.</li>
+      </ul>
+    </section>
+
+    <!-- VLibras -->
+    <section class="flex flex-col gap-3" aria-labelledby="vlibras-titulo">
+      <h3 id="vlibras-titulo" class="text-xl font-semibold text-teal-dark flex items-center gap-2">
+        <i data-lucide="hand" width="22" height="22" aria-hidden="true"></i>
+        Tradução em Libras (VLibras)
+      </h3>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        O portal integra o widget <strong>VLibras</strong>, ferramenta oficial do Governo Federal que traduz o conteúdo textual para a Língua Brasileira de Sinais (Libras).
+      </p>
+      <ul class="list-disc list-inside text-neutral-500 text-base leading-loose pl-2">
+        <li>Em dispositivos móveis, acesse o menu de navegação e toque em <strong>Acessibilidade</strong> para abrir o VLibras.</li>
+        <li>Em telas maiores, o ícone do VLibras aparece na lateral da página.</li>
+      </ul>
+    </section>
+
+    <!-- Navegação por teclado -->
+    <section class="flex flex-col gap-3" aria-labelledby="teclado-titulo">
+      <h3 id="teclado-titulo" class="text-xl font-semibold text-teal-dark flex items-center gap-2">
+        <i data-lucide="keyboard" width="22" height="22" aria-hidden="true"></i>
+        Navegação por teclado
+      </h3>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        Todas as funcionalidades do portal podem ser acessadas sem o uso de mouse. Utilize as teclas abaixo para navegar:
+      </p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-neutral-500 border-collapse" aria-label="Atalhos de teclado">
+          <thead>
+            <tr class="bg-teal-light text-teal-dark text-left">
+              <th class="px-4 py-2 font-semibold rounded-tl-lg">Tecla</th>
+              <th class="px-4 py-2 font-semibold rounded-tr-lg">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-neutral-100">
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Tab</kbd></td>
+              <td class="px-4 py-2">Avança para o próximo elemento interativo</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Shift + Tab</kbd></td>
+              <td class="px-4 py-2">Volta para o elemento interativo anterior</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Enter</kbd> / <kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Espaço</kbd></td>
+              <td class="px-4 py-2">Ativa botões e links</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Esc</kbd></td>
+              <td class="px-4 py-2">Fecha o menu de navegação móvel</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Tab</kbd> (primeira tecla ao carregar a página)</td>
+              <td class="px-4 py-2">Exibe os links de acesso rápido, evitando repetir a navegação do cabeçalho</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="text-base font-semibold text-neutral-600 mt-2">Atalhos de acesso rápido — eMAG (Recomendação 1.1)</h4>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        Em conformidade com o eMAG, este portal disponibiliza atalhos de teclado (<em>accesskey</em>) para navegação direta às áreas principais. No Chrome e Edge, pressione:
+      </p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-neutral-500 border-collapse" aria-label="Atalhos accesskey eMAG">
+          <thead>
+            <tr class="bg-teal-light text-teal-dark text-left">
+              <th class="px-4 py-2 font-semibold rounded-tl-lg">Tecla</th>
+              <th class="px-4 py-2 font-semibold rounded-tr-lg">Destino</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-neutral-100">
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Alt + 1</kbd></td>
+              <td class="px-4 py-2">Ir ao conteúdo principal</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Alt + 2</kbd></td>
+              <td class="px-4 py-2">Ir ao menu principal</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2"><kbd class="bg-neutral-100 rounded px-2 py-0.5 font-mono text-xs">Alt + 4</kbd></td>
+              <td class="px-4 py-2">Ir ao rodapé</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-neutral-400 text-sm leading-relaxed">
+        <strong>Variações por navegador:</strong> Firefox: <kbd class="bg-neutral-100 rounded px-1.5 py-0.5 font-mono text-xs">Alt + Shift + número</kbd> — Firefox no Mac: <kbd class="bg-neutral-100 rounded px-1.5 py-0.5 font-mono text-xs">Ctrl + Alt + número</kbd> — Internet Explorer: pressione a combinação e depois <kbd class="bg-neutral-100 rounded px-1.5 py-0.5 font-mono text-xs">Enter</kbd>.
+      </p>
+    </section>
+
+    <!-- Compatibilidade com leitores de tela -->
+    <section class="flex flex-col gap-3" aria-labelledby="leitores-titulo">
+      <h3 id="leitores-titulo" class="text-xl font-semibold text-teal-dark flex items-center gap-2">
+        <i data-lucide="volume-2" width="22" height="22" aria-hidden="true"></i>
+        Compatibilidade com leitores de tela
+      </h3>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        O portal é desenvolvido com marcação semântica e atributos ARIA para garantir compatibilidade com tecnologias assistivas como leitores de tela (NVDA, JAWS, VoiceOver e TalkBack). Entre as medidas adotadas:
+      </p>
+      <ul class="list-disc list-inside text-neutral-500 text-base leading-loose pl-2">
+        <li>Idioma da página declarado como <strong>Português Brasileiro</strong>, permitindo pronúncia correta pelo leitor de tela.</li>
+        <li>Todos os botões e controles possuem rótulos descritivos.</li>
+        <li>Imagens informativas possuem texto alternativo (<code>alt</code>) descritivo.</li>
+        <li>O indicador de foco é sempre visível ao navegar por teclado.</li>
+        <li>Animações são desativadas automaticamente quando o sistema operacional está configurado para reduzir movimento (<em>prefers-reduced-motion</em>).</li>
+      </ul>
+    </section>
+
+    <!-- Legislação -->
+    <section class="flex flex-col gap-3" aria-labelledby="leis-titulo">
+      <h3 id="leis-titulo" class="text-xl font-semibold text-teal-dark flex items-center gap-2">
+        <i data-lucide="scale" width="22" height="22" aria-hidden="true"></i>
+        Legislação e normas de referência
+      </h3>
+      <ul class="flex flex-col gap-2 text-neutral-500 text-base">
+        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/decreto/d5296.htm" class="underline hover:text-teal transition-colors" target="_blank">Decreto nº 5.296, de 2 de dezembro de 2004</a> — regulamenta as leis de acessibilidade para pessoas com deficiência.</li>
+        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/decreto/d6949.htm" class="underline hover:text-teal transition-colors" target="_blank">Decreto nº 6.949, de 25 de agosto de 2009</a> — promulga a Convenção Internacional sobre os Direitos das Pessoas com Deficiência.</li>
+        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/decreto/d7724.htm" class="underline hover:text-teal transition-colors" target="_blank">Decreto nº 7.724, de 16 de maio de 2012</a> — regulamenta a Lei de Acesso à Informação (Lei nº 12.527).</li>
+        <li><a href="https://emag.governoeletronico.gov.br/" class="underline hover:text-teal transition-colors" target="_blank">eMAG — Modelo de Acessibilidade em Governo Eletrônico</a> — padrão brasileiro para sites governamentais.</li>
+        <li><a href="https://www.planalto.gov.br/ccivil_03/portaria/prt/portaria-n3-7-maio-2007-sisp.htm" class="underline hover:text-teal transition-colors" target="_blank">Portaria nº 3, de 7 de maio de 2007</a> — institucionaliza o eMAG como observância obrigatória nos portais do governo.</li>
+      </ul>
+    </section>
+
+    <!-- Contato -->
+    <section class="flex flex-col gap-3" aria-labelledby="contato-titulo">
+      <h3 id="contato-titulo" class="text-xl font-semibold text-teal-dark flex items-center gap-2">
+        <i data-lucide="message-circle" width="22" height="22" aria-hidden="true"></i>
+        Problemas de acessibilidade?
+      </h3>
+      <p class="text-neutral-500 text-base leading-relaxed">
+        Se você encontrar alguma dificuldade de acesso ou quiser reportar uma barreira de acessibilidade neste portal, entre em contato com a equipe da Fiocruz por meio dos canais institucionais disponíveis em <a href="https://portal.fiocruz.br/fale-conosco" class="underline hover:text-teal transition-colors" target="_blank">portal.fiocruz.br/fale-conosco</a>. Sua contribuição é fundamental para melhorar continuamente a experiência de todos os usuários.
+      </p>
+    </section>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+/* =========================================================
+   indicatorsDashboardPage.css
+   Estilos específicos do Painel de Indicadores.
+   Tailwind cobre layout/tipografia; este arquivo cobre:
+     - Cores semânticas de prioridade (não mapeáveis no config)
+     - Modificadores BEM dos cards/barras/botões
+   ========================================================= */
+
+/* ─── Paleta de prioridade ─────────────────────────────── */
+:root {
+  --priority-altissima:  #b91c1c; /* red-700   */
+  --priority-alta:       #ea580c; /* orange-600 */
+  --priority-media:      #d97706; /* amber-600  */
+  --priority-baixa:      #00796B; /* teal (projeto) */
+
+  --priority-altissima-bg: #fef2f2;
+  --priority-alta-bg:      #fff7ed;
+  --priority-media-bg:     #fffbeb;
+  --priority-baixa-bg:     #E0F2F1; /* teal-light (projeto) */
+}
+
+/* ─── Cards de dimensão (border-top colorida) ──────────── */
+.indicatorsDashboardPage__dimensionCard--baixa  { border-top-color: var(--priority-baixa); }
+.indicatorsDashboardPage__dimensionCard--media  { border-top-color: var(--priority-media); }
+.indicatorsDashboardPage__dimensionCard--alta   { border-top-color: var(--priority-alta); }
+.indicatorsDashboardPage__dimensionCard--altissima { border-top-color: var(--priority-altissima); }
+
+/* ─── Barras do eixo temático ──────────────────────────── */
+.indicatorsDashboardPage__barFill--insuf  { background-color: var(--priority-altissima); }
+.indicatorsDashboardPage__barFill--mod   { background-color: var(--priority-alta); }
+.indicatorsDashboardPage__barFill--adeq  { background-color: var(--priority-baixa); }
+
+.indicatorsDashboardPage__barScore--insuf { color: var(--priority-altissima); }
+.indicatorsDashboardPage__barScore--mod  { color: var(--priority-alta); }
+.indicatorsDashboardPage__barScore--adeq { color: var(--priority-baixa); }
+
+/* ─── Dots de legenda ──────────────────────────────────── */
+.indicatorsDashboardPage__legendDot--insuf { background-color: var(--priority-altissima); }
+.indicatorsDashboardPage__legendDot--mod  { background-color: var(--priority-alta); }
+.indicatorsDashboardPage__legendDot--media { background-color: var(--priority-media); }
+
+/* ─── Cards de estatística (border-left + número) ─────── */
+.indicatorsDashboardPage__statsCard--altissima { border-left-color: var(--priority-altissima); }
+.indicatorsDashboardPage__statsCard--altissima span:first-child { color: var(--priority-altissima); }
+
+.indicatorsDashboardPage__statsCard--alta { border-left-color: var(--priority-alta); }
+.indicatorsDashboardPage__statsCard--alta span:first-child { color: var(--priority-alta); }
+
+.indicatorsDashboardPage__statsCard--media { border-left-color: var(--priority-media); }
+.indicatorsDashboardPage__statsCard--media span:first-child { color: var(--priority-media); }
+
+.indicatorsDashboardPage__statsCard--baixa { border-left-color: var(--priority-baixa); }
+.indicatorsDashboardPage__statsCard--baixa span:first-child { color: var(--priority-baixa); }
+
+/* ─── Botões de filtro do mapa ─────────────────────────── */
+.indicatorsDashboardPage__mapBtn {
+  background-color: #f1f1f1;
+  color: #393939;
+}
+
+.indicatorsDashboardPage__mapBtn:hover {
+  background-color: #E0F2F1;
+  color: #004D40;
+}
+
+.indicatorsDashboardPage__mapBtn.is-active {
+  background-color: var(--priority-baixa);
+  color: #fff;
+}
+
+/* ─── Alto contraste ───────────────────────────────────── */
+html.high-contrast .indicatorsDashboardPage__barFill--insuf,
+html.high-contrast .indicatorsDashboardPage__barFill--mod,
+html.high-contrast .indicatorsDashboardPage__barFill--adeq {
+  background-color: #fff333 !important;
+}
+
+html.high-contrast .indicatorsDashboardPage__statsCard--altissima span:first-child,
+html.high-contrast .indicatorsDashboardPage__statsCard--alta span:first-child,
+html.high-contrast .indicatorsDashboardPage__statsCard--media span:first-child,
+html.high-contrast .indicatorsDashboardPage__statsCard--baixa span:first-child {
+  color: #ffffff !important;
+}

@@ -1,0 +1,11 @@
+{% macro breadcrumb(current_page) %}
+<nav aria-label="Breadcrumb" class="w-full px-mobile-padding sm:px-desktop-padding pt-4">
+  <ol class="mx-auto max-w-width-size flex items-center gap-1.5 text-sm text-neutral-400">
+    <li>
+      <a href="{{ url_for('data_dashboard') }}" class="hover:text-teal transition-colors">Painel</a>
+    </li>
+    <li aria-hidden="true" class="select-none">›</li>
+    <li aria-current="page" class="text-neutral-600 font-medium truncate">{{ current_page }}</li>
+  </ol>
+</nav>
+{% endmacro %}

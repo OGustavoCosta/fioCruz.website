@@ -1,0 +1,693 @@
+{
+  "meta": {
+    "descricao": "Dados placeholder do Guia de Priorização de Investimentos em Saúde",
+    "fonte": "Dados fictícios para desenvolvimento de interface",
+    "ano_referencia": 2022,
+    "total_municipios": 27,
+    "escala_escore": "0 a 100 — quanto mais próximo de 0, maior a necessidade de investimento",
+    "escala_eixos": "0 a 1 — quanto mais próximo de 1, melhor o desempenho",
+    "faixas_prioridade": {
+      "Altíssima": "0 – 25",
+      "Alta":      "25 – 50",
+      "Média":     "50 – 75",
+      "Baixa":     "75 – 100"
+    }
+  },
+  "municipios": [
+    {
+      "id": "1501402",
+      "nome": "Belém",
+      "uf": "PA",
+      "regiao": "N",
+      "escore_final": 31.4,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 28.0,
+        "recursos_infraestrutura": 33.5,
+        "vulnerabilidade_social": 29.0,
+        "aspectos_populacionais": 48.2
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.33,
+        "doencas_infecciosas": 0.41,
+        "lesoes_violencias": 0.36,
+        "doencas_cronicas": 0.52,
+        "saude_reprodutiva": 0.58,
+        "risco_ambiental": 0.44,
+        "cobertura_universal": 0.49
+      },
+      "lat": -1.4558,
+      "lng": -48.4902
+    },
+    {
+      "id": "1400100",
+      "nome": "Boa Vista",
+      "uf": "RR",
+      "regiao": "N",
+      "escore_final": 42.7,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 40.0,
+        "recursos_infraestrutura": 45.0,
+        "vulnerabilidade_social": 38.5,
+        "aspectos_populacionais": 55.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.44,
+        "doencas_infecciosas": 0.50,
+        "lesoes_violencias": 0.42,
+        "doencas_cronicas": 0.60,
+        "saude_reprodutiva": 0.65,
+        "risco_ambiental": 0.55,
+        "cobertura_universal": 0.58
+      },
+      "lat": 2.8235,
+      "lng": -60.6758
+    },
+    {
+      "id": "1600303",
+      "nome": "Macapá",
+      "uf": "AP",
+      "regiao": "N",
+      "escore_final": 22.8,
+      "prioridade": "Altíssima",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 20.0,
+        "recursos_infraestrutura": 25.0,
+        "vulnerabilidade_social": 18.5,
+        "aspectos_populacionais": 38.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.25,
+        "doencas_infecciosas": 0.31,
+        "lesoes_violencias": 0.28,
+        "doencas_cronicas": 0.40,
+        "saude_reprodutiva": 0.45,
+        "risco_ambiental": 0.30,
+        "cobertura_universal": 0.38
+      },
+      "lat": 0.0349,
+      "lng": -51.0694
+    },
+    {
+      "id": "1302603",
+      "nome": "Manaus",
+      "uf": "AM",
+      "regiao": "N",
+      "escore_final": 44.1,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 42.0,
+        "recursos_infraestrutura": 48.0,
+        "vulnerabilidade_social": 40.0,
+        "aspectos_populacionais": 52.5
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.45,
+        "doencas_infecciosas": 0.52,
+        "lesoes_violencias": 0.40,
+        "doencas_cronicas": 0.61,
+        "saude_reprodutiva": 0.66,
+        "risco_ambiental": 0.48,
+        "cobertura_universal": 0.55
+      },
+      "lat": -3.1019,
+      "lng": -60.0250
+    },
+    {
+      "id": "1721000",
+      "nome": "Palmas",
+      "uf": "TO",
+      "regiao": "N",
+      "escore_final": 57.3,
+      "prioridade": "Média",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 55.0,
+        "recursos_infraestrutura": 60.0,
+        "vulnerabilidade_social": 52.0,
+        "aspectos_populacionais": 64.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.58,
+        "doencas_infecciosas": 0.63,
+        "lesoes_violencias": 0.55,
+        "doencas_cronicas": 0.70,
+        "saude_reprodutiva": 0.75,
+        "risco_ambiental": 0.68,
+        "cobertura_universal": 0.72
+      },
+      "lat": -10.1689,
+      "lng": -48.3317
+    },
+    {
+      "id": "1100205",
+      "nome": "Porto Velho",
+      "uf": "RO",
+      "regiao": "N",
+      "escore_final": 38.9,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 36.0,
+        "recursos_infraestrutura": 42.0,
+        "vulnerabilidade_social": 35.0,
+        "aspectos_populacionais": 50.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.40,
+        "doencas_infecciosas": 0.47,
+        "lesoes_violencias": 0.38,
+        "doencas_cronicas": 0.56,
+        "saude_reprodutiva": 0.62,
+        "risco_ambiental": 0.50,
+        "cobertura_universal": 0.53
+      },
+      "lat": -8.7612,
+      "lng": -63.9004
+    },
+    {
+      "id": "1200401",
+      "nome": "Rio Branco",
+      "uf": "AC",
+      "regiao": "N",
+      "escore_final": 29.6,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 26.0,
+        "recursos_infraestrutura": 32.0,
+        "vulnerabilidade_social": 27.5,
+        "aspectos_populacionais": 43.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.30,
+        "doencas_infecciosas": 0.38,
+        "lesoes_violencias": 0.32,
+        "doencas_cronicas": 0.48,
+        "saude_reprodutiva": 0.55,
+        "risco_ambiental": 0.40,
+        "cobertura_universal": 0.45
+      },
+      "lat": -9.9754,
+      "lng": -67.8249
+    },
+    {
+      "id": "2800308",
+      "nome": "Aracaju",
+      "uf": "SE",
+      "regiao": "NE",
+      "escore_final": 49.2,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 47.0,
+        "recursos_infraestrutura": 52.0,
+        "vulnerabilidade_social": 44.0,
+        "aspectos_populacionais": 58.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.50,
+        "doencas_infecciosas": 0.55,
+        "lesoes_violencias": 0.48,
+        "doencas_cronicas": 0.64,
+        "saude_reprodutiva": 0.70,
+        "risco_ambiental": 0.62,
+        "cobertura_universal": 0.65
+      },
+      "lat": -10.9472,
+      "lng": -37.0731
+    },
+    {
+      "id": "2304400",
+      "nome": "Fortaleza",
+      "uf": "CE",
+      "regiao": "NE",
+      "escore_final": 45.8,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 43.0,
+        "recursos_infraestrutura": 50.0,
+        "vulnerabilidade_social": 41.5,
+        "aspectos_populacionais": 55.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.46,
+        "doencas_infecciosas": 0.53,
+        "lesoes_violencias": 0.44,
+        "doencas_cronicas": 0.62,
+        "saude_reprodutiva": 0.68,
+        "risco_ambiental": 0.55,
+        "cobertura_universal": 0.60
+      },
+      "lat": -3.7172,
+      "lng": -38.5433
+    },
+    {
+      "id": "2507507",
+      "nome": "João Pessoa",
+      "uf": "PB",
+      "regiao": "NE",
+      "escore_final": 51.0,
+      "prioridade": "Média",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 49.0,
+        "recursos_infraestrutura": 54.0,
+        "vulnerabilidade_social": 47.0,
+        "aspectos_populacionais": 60.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.52,
+        "doencas_infecciosas": 0.57,
+        "lesoes_violencias": 0.50,
+        "doencas_cronicas": 0.65,
+        "saude_reprodutiva": 0.72,
+        "risco_ambiental": 0.64,
+        "cobertura_universal": 0.68
+      },
+      "lat": -7.1195,
+      "lng": -34.8450
+    },
+    {
+      "id": "2704302",
+      "nome": "Maceió",
+      "uf": "AL",
+      "regiao": "NE",
+      "escore_final": 37.5,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 35.0,
+        "recursos_infraestrutura": 40.0,
+        "vulnerabilidade_social": 33.5,
+        "aspectos_populacionais": 49.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.38,
+        "doencas_infecciosas": 0.45,
+        "lesoes_violencias": 0.37,
+        "doencas_cronicas": 0.55,
+        "saude_reprodutiva": 0.61,
+        "risco_ambiental": 0.48,
+        "cobertura_universal": 0.52
+      },
+      "lat": -9.6658,
+      "lng": -35.7350
+    },
+    {
+      "id": "2408102",
+      "nome": "Natal",
+      "uf": "RN",
+      "regiao": "NE",
+      "escore_final": 53.4,
+      "prioridade": "Média",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 51.0,
+        "recursos_infraestrutura": 56.0,
+        "vulnerabilidade_social": 49.0,
+        "aspectos_populacionais": 62.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.54,
+        "doencas_infecciosas": 0.59,
+        "lesoes_violencias": 0.52,
+        "doencas_cronicas": 0.67,
+        "saude_reprodutiva": 0.73,
+        "risco_ambiental": 0.66,
+        "cobertura_universal": 0.70
+      },
+      "lat": -5.7945,
+      "lng": -35.2110
+    },
+    {
+      "id": "2611606",
+      "nome": "Recife",
+      "uf": "PE",
+      "regiao": "NE",
+      "escore_final": 43.6,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 41.0,
+        "recursos_infraestrutura": 47.0,
+        "vulnerabilidade_social": 39.5,
+        "aspectos_populacionais": 54.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.44,
+        "doencas_infecciosas": 0.51,
+        "lesoes_violencias": 0.42,
+        "doencas_cronicas": 0.60,
+        "saude_reprodutiva": 0.67,
+        "risco_ambiental": 0.53,
+        "cobertura_universal": 0.58
+      },
+      "lat": -8.0476,
+      "lng": -34.8770
+    },
+    {
+      "id": "2927408",
+      "nome": "Salvador",
+      "uf": "BA",
+      "regiao": "NE",
+      "escore_final": 40.3,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 38.0,
+        "recursos_infraestrutura": 44.0,
+        "vulnerabilidade_social": 36.5,
+        "aspectos_populacionais": 51.5
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.41,
+        "doencas_infecciosas": 0.48,
+        "lesoes_violencias": 0.39,
+        "doencas_cronicas": 0.57,
+        "saude_reprodutiva": 0.63,
+        "risco_ambiental": 0.51,
+        "cobertura_universal": 0.54
+      },
+      "lat": -12.9714,
+      "lng": -38.5014
+    },
+    {
+      "id": "2111300",
+      "nome": "São Luís",
+      "uf": "MA",
+      "regiao": "NE",
+      "escore_final": 33.1,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 30.0,
+        "recursos_infraestrutura": 36.0,
+        "vulnerabilidade_social": 31.0,
+        "aspectos_populacionais": 46.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.34,
+        "doencas_infecciosas": 0.40,
+        "lesoes_violencias": 0.33,
+        "doencas_cronicas": 0.50,
+        "saude_reprodutiva": 0.57,
+        "risco_ambiental": 0.43,
+        "cobertura_universal": 0.47
+      },
+      "lat": -2.5297,
+      "lng": -44.3028
+    },
+    {
+      "id": "2211001",
+      "nome": "Teresina",
+      "uf": "PI",
+      "regiao": "NE",
+      "escore_final": 36.2,
+      "prioridade": "Alta",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 33.5,
+        "recursos_infraestrutura": 39.0,
+        "vulnerabilidade_social": 32.0,
+        "aspectos_populacionais": 47.5
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.37,
+        "doencas_infecciosas": 0.43,
+        "lesoes_violencias": 0.35,
+        "doencas_cronicas": 0.53,
+        "saude_reprodutiva": 0.59,
+        "risco_ambiental": 0.46,
+        "cobertura_universal": 0.50
+      },
+      "lat": -5.0892,
+      "lng": -42.8019
+    },
+    {
+      "id": "5300108",
+      "nome": "Brasília",
+      "uf": "DF",
+      "regiao": "CO",
+      "escore_final": 73.5,
+      "prioridade": "Média",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 72.0,
+        "recursos_infraestrutura": 78.0,
+        "vulnerabilidade_social": 68.0,
+        "aspectos_populacionais": 80.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.74,
+        "doencas_infecciosas": 0.78,
+        "lesoes_violencias": 0.70,
+        "doencas_cronicas": 0.82,
+        "saude_reprodutiva": 0.86,
+        "risco_ambiental": 0.80,
+        "cobertura_universal": 0.84
+      },
+      "lat": -15.7801,
+      "lng": -47.9292
+    },
+    {
+      "id": "5002704",
+      "nome": "Campo Grande",
+      "uf": "MS",
+      "regiao": "CO",
+      "escore_final": 66.8,
+      "prioridade": "Média",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 65.0,
+        "recursos_infraestrutura": 70.0,
+        "vulnerabilidade_social": 62.0,
+        "aspectos_populacionais": 73.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.67,
+        "doencas_infecciosas": 0.72,
+        "lesoes_violencias": 0.64,
+        "doencas_cronicas": 0.76,
+        "saude_reprodutiva": 0.80,
+        "risco_ambiental": 0.74,
+        "cobertura_universal": 0.78
+      },
+      "lat": -20.4697,
+      "lng": -54.6201
+    },
+    {
+      "id": "5103403",
+      "nome": "Cuiabá",
+      "uf": "MT",
+      "regiao": "CO",
+      "escore_final": 61.4,
+      "prioridade": "Média",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 59.0,
+        "recursos_infraestrutura": 65.0,
+        "vulnerabilidade_social": 57.0,
+        "aspectos_populacionais": 68.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.62,
+        "doencas_infecciosas": 0.67,
+        "lesoes_violencias": 0.59,
+        "doencas_cronicas": 0.72,
+        "saude_reprodutiva": 0.76,
+        "risco_ambiental": 0.69,
+        "cobertura_universal": 0.73
+      },
+      "lat": -15.5961,
+      "lng": -56.0966
+    },
+    {
+      "id": "5208707",
+      "nome": "Goiânia",
+      "uf": "GO",
+      "regiao": "CO",
+      "escore_final": 70.2,
+      "prioridade": "Média",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 68.5,
+        "recursos_infraestrutura": 74.0,
+        "vulnerabilidade_social": 65.0,
+        "aspectos_populacionais": 77.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.71,
+        "doencas_infecciosas": 0.75,
+        "lesoes_violencias": 0.68,
+        "doencas_cronicas": 0.80,
+        "saude_reprodutiva": 0.83,
+        "risco_ambiental": 0.77,
+        "cobertura_universal": 0.81
+      },
+      "lat": -16.6864,
+      "lng": -49.2643
+    },
+    {
+      "id": "3106200",
+      "nome": "Belo Horizonte",
+      "uf": "MG",
+      "regiao": "SE",
+      "escore_final": 84.7,
+      "prioridade": "Baixa",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 100.0,
+        "recursos_infraestrutura": 83.3,
+        "vulnerabilidade_social": 75.0,
+        "aspectos_populacionais": 81.3
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.54,
+        "doencas_infecciosas": 0.61,
+        "lesoes_violencias": 0.69,
+        "doencas_cronicas": 0.73,
+        "saude_reprodutiva": 0.89,
+        "risco_ambiental": 0.96,
+        "cobertura_universal": 0.99
+      },
+      "lat": -19.9167,
+      "lng": -43.9345
+    },
+    {
+      "id": "3304557",
+      "nome": "Rio de Janeiro",
+      "uf": "RJ",
+      "regiao": "SE",
+      "escore_final": 78.3,
+      "prioridade": "Baixa",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 80.0,
+        "recursos_infraestrutura": 82.0,
+        "vulnerabilidade_social": 70.5,
+        "aspectos_populacionais": 83.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.65,
+        "doencas_infecciosas": 0.70,
+        "lesoes_violencias": 0.60,
+        "doencas_cronicas": 0.78,
+        "saude_reprodutiva": 0.84,
+        "risco_ambiental": 0.88,
+        "cobertura_universal": 0.91
+      },
+      "lat": -22.9068,
+      "lng": -43.1729
+    },
+    {
+      "id": "3550308",
+      "nome": "São Paulo",
+      "uf": "SP",
+      "regiao": "SE",
+      "escore_final": 88.1,
+      "prioridade": "Baixa",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 92.0,
+        "recursos_infraestrutura": 90.0,
+        "vulnerabilidade_social": 82.0,
+        "aspectos_populacionais": 88.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.72,
+        "doencas_infecciosas": 0.77,
+        "lesoes_violencias": 0.68,
+        "doencas_cronicas": 0.85,
+        "saude_reprodutiva": 0.90,
+        "risco_ambiental": 0.93,
+        "cobertura_universal": 0.97
+      },
+      "lat": -23.5505,
+      "lng": -46.6333
+    },
+    {
+      "id": "3205309",
+      "nome": "Vitória",
+      "uf": "ES",
+      "regiao": "SE",
+      "escore_final": 82.5,
+      "prioridade": "Baixa",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 85.0,
+        "recursos_infraestrutura": 86.0,
+        "vulnerabilidade_social": 76.0,
+        "aspectos_populacionais": 84.5
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.68,
+        "doencas_infecciosas": 0.73,
+        "lesoes_violencias": 0.64,
+        "doencas_cronicas": 0.81,
+        "saude_reprodutiva": 0.87,
+        "risco_ambiental": 0.91,
+        "cobertura_universal": 0.94
+      },
+      "lat": -20.2976,
+      "lng": -40.2958
+    },
+    {
+      "id": "4106902",
+      "nome": "Curitiba",
+      "uf": "PR",
+      "regiao": "S",
+      "escore_final": 91.2,
+      "prioridade": "Baixa",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 95.0,
+        "recursos_infraestrutura": 93.0,
+        "vulnerabilidade_social": 86.0,
+        "aspectos_populacionais": 91.5
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.78,
+        "doencas_infecciosas": 0.82,
+        "lesoes_violencias": 0.74,
+        "doencas_cronicas": 0.88,
+        "saude_reprodutiva": 0.93,
+        "risco_ambiental": 0.95,
+        "cobertura_universal": 0.98
+      },
+      "lat": -25.4278,
+      "lng": -49.2731
+    },
+    {
+      "id": "4205407",
+      "nome": "Florianópolis",
+      "uf": "SC",
+      "regiao": "S",
+      "escore_final": 93.6,
+      "prioridade": "Baixa",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 97.0,
+        "recursos_infraestrutura": 95.0,
+        "vulnerabilidade_social": 89.0,
+        "aspectos_populacionais": 93.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.81,
+        "doencas_infecciosas": 0.85,
+        "lesoes_violencias": 0.78,
+        "doencas_cronicas": 0.91,
+        "saude_reprodutiva": 0.95,
+        "risco_ambiental": 0.97,
+        "cobertura_universal": 0.99
+      },
+      "lat": -27.5954,
+      "lng": -48.5480
+    },
+    {
+      "id": "4314902",
+      "nome": "Porto Alegre",
+      "uf": "RS",
+      "regiao": "S",
+      "escore_final": 86.9,
+      "prioridade": "Baixa",
+      "dimensoes": {
+        "desenvolvimento_sustentavel": 90.0,
+        "recursos_infraestrutura": 89.0,
+        "vulnerabilidade_social": 80.0,
+        "aspectos_populacionais": 87.0
+      },
+      "eixos": {
+        "saude_recem_nascido": 0.75,
+        "doencas_infecciosas": 0.80,
+        "lesoes_violencias": 0.71,
+        "doencas_cronicas": 0.86,
+        "saude_reprodutiva": 0.91,
+        "risco_ambiental": 0.94,
+        "cobertura_universal": 0.97
+      },
+      "lat": -30.0346,
+      "lng": -51.2177
+    }
+  ]
+}

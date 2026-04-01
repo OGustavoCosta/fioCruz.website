@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
+{% from "components/breadcrumb.html" import breadcrumb %}
 
 {% block title %}Produções Bibliográficas{% endblock %}
 
 {% block content %}
-<div class="publicationsPage__background w-full px-mobile-padding sm:px-desktop-padding py-6">
+{{ breadcrumb("Produções Bibliográficas") }}
+<div class="publicationsPage__background w-full px-mobile-padding sm:px-desktop-padding py-6 pt-3">
   <header class="header header--publicationsPage mx-auto max-w-width-size flex flex-col gap-4">
-    <h1 class="header__title header__title--publicationsPage text-4xl font-semibold text-dark-cyan max-w-200">Produções Bibliográficas</h1>
+    <h1 class="header__title header__title--publicationsPage text-xl sm:text-3xl font-semibold text-dark-cyan max-w-200">Produções Bibliográficas</h1>
     <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Explore artigos científicos, teses, dissertações e demais produções acadêmicas desenvolvidas pelos pesquisadores da Fiocruz.</p>
   </header>
 </div>

@@ -31,12 +31,22 @@ def publications():
 def about():
     return render_template('pages/about.html')
 
+@app.route('/acessibility')
+def accessibility():
+    return render_template('pages/accessibility.html')
 
 @app.route('/api/dashboard')
 def api_dashboard():
     with open("data/mapa_leaflet.geojson", encoding="utf-8") as f:
         data = json.load(f)
     return jsonify(data)
+
+
+@app.route('/api/indicadores')
+def api_indicadores():
+    path = os.path.join(os.path.dirname(__file__), 'data', 'placeholder_indicadores.json')
+    with open(path, encoding='utf-8') as f:
+        return jsonify(json.load(f))
 
 
 @app.route('/')

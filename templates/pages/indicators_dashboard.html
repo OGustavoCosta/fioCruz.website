@@ -2,11 +2,370 @@
 
 {% block title %}Painel de Indicadores{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/indicatorsDashboardPage.css') }}" />
+{% endblock %}
+
+{% from "components/breadcrumb.html" import breadcrumb %}
+
 {% block content %}
-<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding py-6">
-  <header class="header header--indicatorsDashboardPage mx-auto max-w-width-size flex flex-col gap-4">
-    <h1 class="header__title header__title--indicatorsDashboardPage text-4xl font-semibold text-dark-cyan max-w-200">Painel de Indicadores</h1>
-    <p class="header__subtitle text-neutral-400 text-[1.125rem] max-w-200">Acompanhe os principais indicadores de saúde pública com visualizações interativas, comparações históricas e análises por região e período.</p>
+
+{{ breadcrumb("Painel de Indicadores") }}
+
+<!-- Header -->
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding py-6 pt-3">
+  <header class="mx-auto max-w-width-size flex flex-col gap-3">
+    <h1 class="text-xl sm:text-3xl font-semibold text-dark-cyan max-w-200">Painel de Indicadores</h1>
+    <p class="text-neutral-400 text-base sm:text-[1.125rem] max-w-200">Ferramenta técnica para auxiliar gestores públicos na tomada de decisão sobre quais municípios são mais prioritários para recebimento de investimentos em saúde.</p>
   </header>
 </div>
+
+<!-- Informativo -->
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
+  <section class="info" aria-labelledby="indicators-info-title">
+    <div class="mx-auto max-w-width-size">
+      <div class="bg-gradient-to-br from-teal-light to-white border-l-4 border-teal rounded-xl px-3 py-6 sm:p-6">
+        <h2 id="indicators-info-title" class="text-base sm:text-xl font-semibold text-teal-dark mb-3 flex items-center gap-2">
+          <i data-lucide="info" class="shrink-0" width="20" height="20"></i>
+          O que é o Guia de Priorização de Investimentos em Saúde?
+        </h2>
+        <p class="text-neutral-500 text-sm sm:text-base leading-[1.7] mb-3">
+          O Guia de Priorização de Investimentos em Saúde é uma ferramenta técnica, objetiva e transparente desenvolvida
+          para auxiliar gestores públicos na tomada de decisão sobre quais os municípios são mais prioritários para
+          recebimento de investimentos em saúde. Construído por meio de uma matriz de decisões, é baseado em indicadores
+          calculados com dados públicos do Censo Demográfico 2022, abrangendo os 5.570 municípios brasileiros.
+        </p>
+        <p class="text-neutral-500 text-sm sm:text-base leading-[1.7] mb-4">
+          Cada município recebe um escore de priorização que varia de 0 a 100, sendo que, quanto mais próximo de 0,
+          maior a necessidade de recebimento de recursos. O escore final considera as dimensões
+          <strong>Desenvolvimento Sustentável em Saúde</strong>, <strong>Recursos e Infraestrutura em Saúde</strong>,
+          <strong>Vulnerabilidade Social</strong> e <strong>Aspectos Populacionais</strong>.
+        </p>
+        <a href="#" class="inline-flex items-center gap-2 text-teal font-semibold text-sm sm:text-base hover:text-teal-dark hover:gap-3 transition-all">
+          Saiba mais sobre a metodologia
+          <i data-lucide="arrow-right" class="shrink-0" width="16" height="16"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ─── VISUALIZAÇÃO 1: Desempenho do município ─── -->
+
+<!-- Filtro -->
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
+  <section class="filters" aria-labelledby="indicators-filters-title">
+    <div class="mx-auto max-w-width-size bg-gradient-to-br from-teal to-teal-dark rounded-2xl px-3 py-4 sm:p-6 shadow-[0_4px_16px_rgba(0,121,107,0.15)]">
+      <h2 id="indicators-filters-title" class="text-base sm:text-xl font-semibold text-white mb-1 flex items-center gap-2">
+        <i data-lucide="map-pin" class="shrink-0" width="20" height="20"></i>
+        Desempenho do Município
+      </h2>
+      <p class="text-white/70 text-xs sm:text-sm mb-5">Visualize o escore de priorização e os resultados do município selecionado</p>
+      <div class="flex flex-col gap-2">
+        <span class="text-sm font-semibold text-white/95">Selecione o município</span>
+        <div class="relative">
+          <button
+            type="button"
+            id="municipio-select-trigger"
+            class="w-full flex items-center justify-between gap-3 p-2 sm:px-4 sm:py-3 border-2 border-white/20 rounded-lg bg-white/95 text-[0.75rem] sm:text-[0.9rem] text-neutral-500 hover:bg-white hover:border-white/40 transition-all cursor-pointer"
+            aria-expanded="false"
+            aria-controls="municipio-select-dropdown"
+          >
+            <span id="municipio-select-value" class="text-left min-w-0 flex-1">Selecione um município...</span>
+            <i data-lucide="chevron-down" class="shrink-0 text-neutral-400 transition-transform duration-200" width="18" height="18"></i>
+          </button>
+          <ul id="municipio-select-dropdown" class="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] border border-neutral-150 z-50 overflow-hidden max-h-64 overflow-y-auto hidden" role="listbox"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Etapa 1: Nível de Prioridade -->
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
+  <section class="etapa1" aria-labelledby="etapa1-title">
+    <div class="mx-auto max-w-width-size bg-white rounded-2xl px-3 py-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+
+      <div class="flex items-center gap-3 mb-6">
+        <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal text-white text-sm font-bold" aria-hidden="true">1</span>
+        <div>
+          <h2 id="etapa1-title" class="text-base sm:text-xl font-semibold text-neutral-500">Nível de prioridade</h2>
+          <p class="text-neutral-400 text-xs sm:text-sm">Escore final e desempenho por dimensão</p>
+        </div>
+      </div>
+
+      <!-- Chart placeholder -->
+      <div class="flex flex-col items-center justify-center gap-3 bg-neutral-50 border-2 border-dashed border-neutral-200 rounded-2xl py-16 mb-6">
+        <p class="text-neutral-400 text-sm font-medium">Visualização em desenvolvimento</p>
+      </div>
+
+      <!-- 4 dimension cards: 1 → 2 → 4 cols -->
+      <div id="etapa1-dimensoes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+
+        <div class="indicatorsDashboardPage__dimensionCard--baixa flex flex-col gap-2 border border-neutral-150 border-t-4 rounded-xl p-4">
+          <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wide leading-snug">Desenvolvimento Sustentável em Saúde</span>
+          <span class="text-3xl font-extrabold text-neutral-500">100</span>
+          <span class="self-start inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-teal-light text-teal-dark">BAIXA</span>
+        </div>
+
+        <div class="indicatorsDashboardPage__dimensionCard--baixa flex flex-col gap-2 border border-neutral-150 border-t-4 rounded-xl p-4">
+          <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wide leading-snug">Recursos e Infraestrutura em Saúde</span>
+          <span class="text-3xl font-extrabold text-neutral-500">83,33</span>
+          <span class="self-start inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-teal-light text-teal-dark">BAIXA</span>
+        </div>
+
+        <div class="indicatorsDashboardPage__dimensionCard--baixa flex flex-col gap-2 border border-neutral-150 border-t-4 rounded-xl p-4">
+          <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wide leading-snug">Aspectos Populacionais</span>
+          <span class="text-3xl font-extrabold text-neutral-500">81,25</span>
+          <span class="self-start inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-teal-light text-teal-dark">BAIXA</span>
+        </div>
+
+        <div class="indicatorsDashboardPage__dimensionCard--media flex flex-col gap-2 border border-neutral-150 border-t-4 rounded-xl p-4">
+          <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wide leading-snug">Vulnerabilidade Social</span>
+          <span class="text-3xl font-extrabold text-neutral-500">75,00</span>
+          <span class="self-start inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700">MÉDIA</span>
+        </div>
+
+      </div>
+
+      <!-- Card de resumo -->
+      <div id="etapa1-summary" class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-neutral-50 border border-neutral-150 rounded-xl px-4 py-4 sm:px-6">
+        <div class="flex flex-col gap-0.5">
+          <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wide">Nível de Priorização</span>
+          <span class="text-lg sm:text-2xl font-bold text-neutral-500">Belo Horizonte</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-3xl sm:text-4xl font-extrabold text-teal">84,69</span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-teal-light text-teal-dark">PRIORIDADE BAIXA</span>
+        </div>
+      </div>
+
+      <!-- Legenda -->
+      <div class="flex flex-wrap items-center justify-center gap-5 mt-5 text-xs text-neutral-400">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-teal inline-block"></span>Prioridade Baixa
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="indicatorsDashboardPage__legendDot--media w-2.5 h-2.5 rounded-full inline-block"></span>Prioridade Média
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-red inline-block"></span>Prioridade Alta
+        </span>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Etapa 2: Eixo Temático -->
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
+  <section class="etapa2" aria-labelledby="etapa2-title">
+    <div class="mx-auto max-w-width-size bg-white rounded-2xl px-3 py-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+
+      <div class="flex items-center gap-3 mb-6">
+        <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal text-white text-sm font-bold" aria-hidden="true">2</span>
+        <div>
+          <h2 id="etapa2-title" class="text-base sm:text-xl font-semibold text-neutral-500">Eixo temático</h2>
+          <p class="text-neutral-400 text-xs sm:text-sm">Desempenho por área de saúde</p>
+        </div>
+      </div>
+
+      <!-- Legenda -->
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 text-xs text-neutral-400">
+        <span class="text-xs font-semibold text-neutral-400 uppercase tracking-wide">Legenda:</span>
+        <span class="flex items-center gap-1.5">
+          <span class="indicatorsDashboardPage__legendDot--insuf w-2.5 h-2.5 rounded-full inline-block"></span>Insuficiente (&lt; 0,6)
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="indicatorsDashboardPage__legendDot--mod w-2.5 h-2.5 rounded-full inline-block"></span>Moderado (0,6 – 0,8)
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-teal inline-block"></span>Adequado (&gt; 0,8)
+        </span>
+      </div>
+
+      <!-- Barras -->
+      <div id="etapa2-eixos" class="flex flex-col gap-5" role="list" aria-label="Desempenho por eixo temático">
+
+        <div role="listitem">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <span class="text-sm font-medium text-neutral-500">Saúde do recém-nascido e criança</span>
+            <span class="indicatorsDashboardPage__barScore--insuf text-sm font-bold ml-4 shrink-0">0,54</span>
+          </div>
+          <div class="h-3 w-full bg-neutral-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100">
+            <div class="indicatorsDashboardPage__barFill--insuf h-full rounded-full" style="width:54%"></div>
+          </div>
+        </div>
+
+        <div role="listitem">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <span class="text-sm font-medium text-neutral-500">Doenças infecciosas</span>
+            <span class="indicatorsDashboardPage__barScore--mod text-sm font-bold ml-4 shrink-0">0,61</span>
+          </div>
+          <div class="h-3 w-full bg-neutral-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100">
+            <div class="indicatorsDashboardPage__barFill--mod h-full rounded-full" style="width:61%"></div>
+          </div>
+        </div>
+
+        <div role="listitem">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <span class="text-sm font-medium text-neutral-500">Lesões e violências</span>
+            <span class="indicatorsDashboardPage__barScore--mod text-sm font-bold ml-4 shrink-0">0,69</span>
+          </div>
+          <div class="h-3 w-full bg-neutral-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100">
+            <div class="indicatorsDashboardPage__barFill--mod h-full rounded-full" style="width:69%"></div>
+          </div>
+        </div>
+
+        <div role="listitem">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <span class="text-sm font-medium text-neutral-500">Doenças crônicas não transmissíveis</span>
+            <span class="indicatorsDashboardPage__barScore--mod text-sm font-bold ml-4 shrink-0">0,73</span>
+          </div>
+          <div class="h-3 w-full bg-neutral-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100">
+            <div class="indicatorsDashboardPage__barFill--mod h-full rounded-full" style="width:73%"></div>
+          </div>
+        </div>
+
+        <div role="listitem">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <span class="text-sm font-medium text-neutral-500">Saúde reprodutiva e materna</span>
+            <span class="indicatorsDashboardPage__barScore--adeq text-sm font-bold ml-4 shrink-0">0,89</span>
+          </div>
+          <div class="h-3 w-full bg-neutral-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100">
+            <div class="indicatorsDashboardPage__barFill--adeq h-full rounded-full" style="width:89%"></div>
+          </div>
+        </div>
+
+        <div role="listitem">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <span class="text-sm font-medium text-neutral-500">Risco ambiental</span>
+            <span class="indicatorsDashboardPage__barScore--adeq text-sm font-bold ml-4 shrink-0">0,96</span>
+          </div>
+          <div class="h-3 w-full bg-neutral-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100">
+            <div class="indicatorsDashboardPage__barFill--adeq h-full rounded-full" style="width:96%"></div>
+          </div>
+        </div>
+
+        <div role="listitem">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <span class="text-sm font-medium text-neutral-500">Cobertura universal de saúde e sistemas</span>
+            <span class="indicatorsDashboardPage__barScore--adeq text-sm font-bold ml-4 shrink-0">0,99</span>
+          </div>
+          <div class="h-3 w-full bg-neutral-100 rounded-full overflow-hidden" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100">
+            <div class="indicatorsDashboardPage__barFill--adeq h-full rounded-full" style="width:99%"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ─── VISUALIZAÇÃO 2: Resultados Gerais ─── -->
+
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-6">
+  <section class="resultados" aria-labelledby="resultados-title">
+    <div class="mx-auto max-w-width-size bg-white rounded-2xl px-3 py-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+
+      <div class="mb-5">
+        <h2 id="resultados-title" class="text-base sm:text-xl font-semibold text-neutral-500 mb-1">Visão Geral dos Resultados</h2>
+        <p class="text-neutral-400 text-xs sm:text-sm">Distribuição dos 5.570 municípios brasileiros por nível de prioridade — dados de 2022</p>
+      </div>
+
+      <!-- Botões de filtro do mapa -->
+      <div class="flex flex-wrap gap-2 mb-5" role="group" aria-label="Filtrar mapa por dimensão">
+        <button type="button" class="indicatorsDashboardPage__mapBtn is-active px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold cursor-pointer transition-all" aria-pressed="true">
+          Resultado Geral
+        </button>
+        <button type="button" class="indicatorsDashboardPage__mapBtn px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold cursor-pointer transition-all" aria-pressed="false">
+          Desenvolvimento Sustentável em Saúde
+        </button>
+        <button type="button" class="indicatorsDashboardPage__mapBtn px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold cursor-pointer transition-all" aria-pressed="false">
+          Recursos e Infraestrutura em Saúde
+        </button>
+        <button type="button" class="indicatorsDashboardPage__mapBtn px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold cursor-pointer transition-all" aria-pressed="false">
+          Vulnerabilidade Social
+        </button>
+        <button type="button" class="indicatorsDashboardPage__mapBtn px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold cursor-pointer transition-all" aria-pressed="false">
+          Aspectos Populacionais
+        </button>
+      </div>
+
+      <!-- Google Maps placeholder -->
+      <div class="rounded-xl overflow-hidden mb-6 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+        <iframe
+          src="https://maps.google.com/maps?q=Brazil&t=&z=4&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="460"
+          style="border:0;display:block;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa de priorização dos municípios brasileiros"
+        ></iframe>
+      </div>
+
+      <!-- 4 cards de estatística: 1 → 2 → 4 cols -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        <div class="indicatorsDashboardPage__statsCard--altissima flex flex-col gap-2 border border-neutral-150 border-l-4 rounded-xl p-5">
+          <span class="text-4xl font-extrabold">42</span>
+          <span class="text-sm font-semibold text-neutral-500 leading-tight">Municípios Prioridade Altíssima</span>
+          <span class="text-xs text-neutral-400">100% no Norte e Nordeste</span>
+        </div>
+
+        <div class="indicatorsDashboardPage__statsCard--alta flex flex-col gap-2 border border-neutral-150 border-l-4 rounded-xl p-5">
+          <span class="text-4xl font-extrabold">497</span>
+          <span class="text-sm font-semibold text-neutral-500 leading-tight">Municípios Prioridade Alta</span>
+          <span class="text-xs text-neutral-400">91% no Norte e Nordeste</span>
+        </div>
+
+        <div class="indicatorsDashboardPage__statsCard--media flex flex-col gap-2 border border-neutral-150 border-l-4 rounded-xl p-5">
+          <span class="text-4xl font-extrabold">3.880</span>
+          <span class="text-sm font-semibold text-neutral-500 leading-tight">Municípios Prioridade Média</span>
+          <span class="text-xs text-neutral-400">38% Nordeste · 25% Sudeste</span>
+        </div>
+
+        <div class="indicatorsDashboardPage__statsCard--baixa flex flex-col gap-2 border border-neutral-150 border-l-4 rounded-xl p-5">
+          <span class="text-4xl font-extrabold">1.151</span>
+          <span class="text-sm font-semibold text-neutral-500 leading-tight">Municípios Prioridade Baixa</span>
+          <span class="text-xs text-neutral-400">58% Sudeste · 31% Sul</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Exportar -->
+<div class="indicatorsDashboardPage__background w-full px-mobile-padding sm:px-desktop-padding pb-8">
+  <section class="download">
+    <div class="mx-auto max-w-width-size bg-white rounded-xl px-3 py-6 sm:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] flex flex-col sm:flex-row items-start sm:items-center justify-between flex-wrap gap-4">
+      <div class="flex-1 sm:min-w-60 flex flex-col gap-2">
+        <h2 class="text-base sm:text-[1.125rem] font-semibold text-neutral-500">Exportar Dados</h2>
+        <p class="text-sm text-neutral-400">Faça o download dos dados filtrados em diferentes formatos para análise offline.</p>
+      </div>
+      <div class="flex gap-3 flex-wrap">
+        <button class="inline-flex items-center gap-2 px-5 py-3 bg-teal text-white border-2 border-teal rounded-lg text-sm sm:text-base font-semibold hover:bg-teal-dark hover:border-teal-dark hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,121,107,0.3)] transition-all cursor-pointer">
+          <i data-lucide="download" class="shrink-0" width="16" height="16"></i>
+          Baixar CSV
+        </button>
+        <button class="inline-flex items-center gap-2 px-5 py-3 bg-white text-teal border-2 border-teal rounded-lg text-sm sm:text-base font-semibold hover:bg-teal-light transition-all cursor-pointer">
+          <i data-lucide="download" class="shrink-0" width="16" height="16"></i>
+          Baixar Excel
+        </button>
+        <button class="inline-flex items-center gap-2 px-5 py-3 bg-white text-teal border-2 border-teal rounded-lg text-sm sm:text-base font-semibold hover:bg-teal-light transition-all cursor-pointer">
+          <i data-lucide="download" class="shrink-0" width="16" height="16"></i>
+          Baixar JSON
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/indicators_dashboard.js') }}"></script>
 {% endblock %}
