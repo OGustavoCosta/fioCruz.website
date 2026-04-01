@@ -31,7 +31,7 @@ def publications():
 def about():
     return render_template('pages/about.html')
 
-@app.route('/acessibility')
+@app.route('/acessibilidade')
 def accessibility():
     return render_template('pages/accessibility.html')
 
